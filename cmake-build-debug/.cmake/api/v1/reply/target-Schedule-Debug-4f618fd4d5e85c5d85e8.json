@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Schedule"
+			"path" : "Schedule.exe"
+		},
+		{
+			"path" : "Schedule.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -42,7 +45,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk"
+					"fragment" : "-g"
 				},
 				{
 					"fragment" : "-std=gnu++14"
@@ -52,7 +55,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/Users/guifo/Desktop/Schedule/src"
+					"path" : "C:/Users/35191/Faculdade/AED/Trabalho/Schedule/src"
 				}
 			],
 			"language" : "CXX",
@@ -87,12 +90,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "Schedule",
-	"nameOnDisk" : "Schedule",
+	"nameOnDisk" : "Schedule.exe",
 	"paths" : 
 	{
 		"build" : ".",
