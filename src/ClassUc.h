@@ -4,9 +4,9 @@
 
 class ClassUc {
 private:
-    int stuCode, classCode;
+    int ucCode, classCode;
 public:
-    ClassUc(int stuCode, int classCode);
+    ClassUc(int ucCode, int classCode);
 };
 
 
