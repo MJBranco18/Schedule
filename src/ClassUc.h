@@ -1,12 +1,20 @@
 #ifndef TRABALHO_CLASSUC_H
 #define TRABALHO_CLASSUC_H
 
+#include <iostream>
+#include <string>
 
 class ClassUc {
 private:
-    int ucCode, classCode;
+    std::string ucCode, classCode;
 public:
-    ClassUc(int ucCode, int classCode);
+    ClassUc();
+    ClassUc(std::string ucCode, std::string classCode);
+
+    std::string getUcCode() const;
+    std::string getClassCode() const;
+    void setUcCode(std::string ucCode);
+    void setClassCode(std::string classCode);
 };
 
 
