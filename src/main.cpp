@@ -16,7 +16,7 @@ void showMenu(){
 
 int main(){
     ScheduleManager obj;
-    obj.readFiles("/Users/guifo/Desktop/Schedule/csv_files/classes_per_uc.csv","/Users/guifo/Desktop/Schedule/csv_files/classes.csv","/Users/guifo/Desktop/Schedule/csv_files/students_classes.csv");
+    obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
     showMenu();
     return 0;
 }

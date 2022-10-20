@@ -3,23 +3,49 @@
 ScheduleManager::ScheduleManager() = default;
 
 ScheduleManager::ScheduleManager(std::vector<Student> students, std::vector<ScheduleUc> schedule){
-    this->students = students; //erro de assignment por ser uma variável do tipo set, tentar dar fix
+    this->students = students;
     this->schedule = schedule;
 }
 
-void ScheduleManager::readFiles(std::string file1, std::string file2, std::string file3){
+void ScheduleManager::readFiles(const std::string& file1, const std::string& file2, const std::string& file3){
     std::fstream in1, in2, in3;
-    std::string classCode, ucCode, token = "aba";
-    in1.open(file1); in2.open(file2); in3.open(file3);
-    if(in1.is_open())
-        std::cout << "The file opened!" << std::endl;
-    else
-        std::cout << "Error Occurred. File did not open." << std::endl;
+    std::string classCode, ucCode, token;
+    ScheduleUc current_scheduleUc;
+    ClassUc current_classUc;
 
-    std::getline(in1,token, ','); std::getline(in1,token, ','); //step var names ahead
-    ScheduleUc current;
-    while(std::getline(in1,token, ',')){ //só para testar para ver se o ficheiro é bem lido
-        std::cout << token << std::endl;
+    in1.open(file1); in2.open(file2); in3.open(file3); //open files
+
+    std::getline(in1,token, '\n'); //step var names ahead
+
+    while(std::getline(in1,token, '\n')){
+        std::stringstream iss(token);
+
+        unsigned long pos = token.find(',');
+        ucCode = token.substr(0,pos);
+        classCode = token.substr(pos+1);
+
+        current_classUc.setUcCode(ucCode);
+        current_classUc.setClassCode(classCode);
+
+        current_scheduleUc.set_classUc(current_classUc);
+
+        schedule.push_back(current_scheduleUc);
     }
 
+}
+
+void ScheduleManager::setStudents(std::vector<Student> students) {
+    this->students = students;
+}
+
+void ScheduleManager::setSchedule(std::vector<ScheduleUc> schedule) {
+    this->schedule = schedule;
+}
+
+std::vector<Student> ScheduleManager::getStudents() const {
+    return this->students;
+}
+
+std::vector<ScheduleUc> ScheduleManager::getSchedule() const {
+    return this->schedule;
 }
