@@ -6,9 +6,9 @@
 class Slot {
 private:
     float startHour, duration;
-    std::string type;
+    std::string type, day;
 public:
-    Slot(float startHour, float duration, std::string type);
+    Slot(std::string day, float startHour, float duration, std::string type);
 };
 
 
