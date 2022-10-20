@@ -9,6 +9,7 @@ private:
     int ucCode, classCode;
     std::vector<Slot> schedule;
 public:
+    ScheduleUc();
     ScheduleUc(int ucCode, int classCode, std::vector<Slot> schedule);
 
 };
