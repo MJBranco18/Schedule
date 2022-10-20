@@ -8,13 +8,17 @@ ScheduleManager::ScheduleManager(std::vector<Student> students, std::vector<Sche
 }
 
 void ScheduleManager::readFiles(std::string file1, std::string file2, std::string file3){
-    std::ifstream in1, in2, in3;
-    std::string classCode, ucCode, token;
+    std::fstream in1, in2, in3;
+    std::string classCode, ucCode, token = "aba";
     in1.open(file1); in2.open(file2); in3.open(file3);
-    std::getline(in1, token, ',');
-    std::cout << token << std::endl;
+    if(in1.is_open())
+        std::cout << "The file opened!" << std::endl;
+    else
+        std::cout << "Error Occurred. File did not open." << std::endl;
+
+    std::getline(in1,token, ','); std::getline(in1,token, ','); //step var names ahead
     ScheduleUc current;
-    while(std::getline(in1,token, ',')){
+    while(std::getline(in1,token, ',')){ //só para testar para ver se o ficheiro é bem lido
         std::cout << token << std::endl;
     }
 
