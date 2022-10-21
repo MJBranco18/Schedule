@@ -14,9 +14,19 @@ void showMenu(){
     std::cout << "--------------------------------------------" << std::endl;
 }
 
+
+void test(ScheduleManager obj){
+    std::vector<ScheduleUc> testVectorS = obj.getSchedule();
+    for(int i =0;i < 30; i++){
+        std::cout << testVectorS[i].get_classUc().get_ucCode() << std::endl;
+        //<< testVectorS[i].get_classUc().get_classCode()
+    }
+}
+
 int main(){
     ScheduleManager obj;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
     showMenu();
+    //test(obj);
     return 0;
 }
