@@ -8,18 +8,18 @@ ClassUc::ClassUc(std::string ucCode, std::string classCode){
     this->classCode = classCode;
 }
 
-std::string ClassUc::getUcCode() const {
+std::string ClassUc::get_ucCode() const {
     return this->ucCode;
 }
 
-std::string ClassUc::getClassCode() const {
+std::string ClassUc::get_classCode() const {
     return this->classCode;
 }
 
-void ClassUc::setUcCode(std::string ucCode) {
+void ClassUc::set_ucCode(std::string ucCode) {
     this->ucCode = ucCode;
 }
 
-void ClassUc::setClassCode(std::string classCode) {
+void ClassUc::set_classCode(std::string classCode) {
     this->classCode = classCode;
 }

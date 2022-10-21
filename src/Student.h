@@ -12,6 +12,10 @@ private:
     std::vector<ClassUc> classes;
 public:
     Student(std::string name, int stuCode, std::string statute,std::vector<ClassUc> classes);
+
+    const std::string &getName() const;
+
+    void setName(const std::string &name);
 };
 
 
