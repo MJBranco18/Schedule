@@ -83,6 +83,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         students.push_back(current_student);
         schedule.push_back(current_scheduleUc);
     }
+
 }
 
 
@@ -102,3 +103,4 @@ std::vector<Student> ScheduleManager::getStudents() const {
 std::vector<ScheduleUc> ScheduleManager::getSchedule() const {
     return this->schedule;
 }
+
