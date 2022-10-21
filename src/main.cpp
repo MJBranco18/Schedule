@@ -16,17 +16,32 @@ void showMenu(){
 
 
 void test(ScheduleManager obj){
-    std::vector<ScheduleUc> testVectorS = obj.getSchedule();
-    for(int i =0;i < 30; i++){
-        std::cout << testVectorS[i].get_classUc().get_ucCode() << std::endl;
-        //<< testVectorS[i].get_classUc().get_classCode()
+    std::vector<Student> students = obj.getStudents();
+    for(Student s : students){
+        std::cout << s.getName() << " - " << s.getStuCode() << std::endl;
     }
 }
 
+
 int main(){
+    int choice;
     ScheduleManager obj;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    showMenu();
+    test(obj);
+    showMenu(); std::cin >> choice;
+
+    switch (choice) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+            break;
+    }
     //test(obj);
     return 0;
 }

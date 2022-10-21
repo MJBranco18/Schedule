@@ -1,9 +1,33 @@
 #include "Student.h"
 
-Student::Student(std::string name, int stuCode, std::string statute,std::vector<ClassUc> classes) {
+Student::Student() = default;
+
+Student::Student(std::string name, long int stuCode, std::vector<ClassUc> classes) {
     this->name = name;
     this->stuCode = stuCode;
-    this->statute = statute;
     this->classes = classes;
 }
 
+std::string Student::getName() const {
+    return this->name;
+}
+
+long int Student::getStuCode() const{
+    return this->stuCode;
+}
+
+std::vector<ClassUc> Student::getClasses() const{
+    return this->classes;
+}
+
+void Student::setName(std::string name){
+    this->name = name;
+}
+
+void Student::setStuCode(long int stuCode){
+    this->stuCode = stuCode;
+}
+
+void Student::setClasses(std::vector<ClassUc> classes){
+    this->classes = classes;
+}
