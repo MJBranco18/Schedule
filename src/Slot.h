@@ -8,7 +8,16 @@ private:
     float startHour, duration;
     std::string type, day;
 public:
-    Slot(std::string day, float startHour, float duration, std::string type);
+    Slot();
+    Slot(std::string day, double startHour, double duration, std::string type);
+    std::string get_day() const;
+    double get_startHour() const;
+    double get_duration() const;
+    std::string get_type();
+    void set_day(std::string day);
+    void set_startHour(double startHour);
+    void set_duration(double duration);
+    void set_type(std::string type);
 };
 
 

@@ -10,11 +10,10 @@ private:
 public:
     ClassUc();
     ClassUc(std::string ucCode, std::string classCode);
-
-    std::string getUcCode() const;
-    std::string getClassCode() const;
-    void setUcCode(std::string ucCode);
-    void setClassCode(std::string classCode);
+    std::string get_ucCode() const;
+    std::string get_classCode() const;
+    void set_ucCode(std::string ucCode);
+    void set_classCode(std::string classCode);
 };
 
 

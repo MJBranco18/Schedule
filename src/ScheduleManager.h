@@ -19,13 +19,9 @@ public:
     ScheduleManager();
     ScheduleManager(std::vector<Student> students, std::vector<ScheduleUc> schedule);
     void readFiles(const std::string& file1, const std::string& file2, const std::string& file3);
-
     std::vector<Student> getStudents() const;
-
     std::vector<ScheduleUc> getSchedule() const;
-
     void setStudents(std::vector<Student> students);
-
     void setSchedule(std::vector<ScheduleUc> schedule);
 };
 
