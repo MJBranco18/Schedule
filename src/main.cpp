@@ -18,7 +18,8 @@ void showMenu(){
 void test(ScheduleManager obj){
     std::vector<Student> students = obj.getStudents();
     for(Student s : students){
-        std::cout << s.getName() << " - " << s.getStuCode() << std::endl;
+        std::cout << s.getName() << " - " << s.getStuCode() <<  " - ";
+        for(ClassUc c : s.getClasses()) std::cout << c.get_ucCode() << " - " << c.get_classCode() << std::endl;
     }
 }
 

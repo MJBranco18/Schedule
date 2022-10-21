@@ -77,6 +77,9 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_classUc.set_classCode(temp[3]);
         current_scheduleUc.set_classUc(current_classUc);
 
+        std::vector<ClassUc> classStudents;
+        classStudents.push_back(current_classUc);
+        current_student.setClasses(classStudents);
         students.push_back(current_student);
         schedule.push_back(current_scheduleUc);
     }
