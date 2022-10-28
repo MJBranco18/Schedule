@@ -4,7 +4,6 @@
 #include "Student.h"
 #include "Slot.h"
 #include "ClassUc.h"
-#include <stdlib.h>
 
 void showMenu(){
     std::cout << "------------------- Menu -------------------" << std::endl;
@@ -15,7 +14,7 @@ void showMenu(){
     std::cout << "--------------------------------------------" << std::endl;
 }
 
-
+/*
 void test(ScheduleManager obj){
     std::vector<Student> students = obj.getStudents();
     for(Student s : students){
@@ -24,7 +23,7 @@ void test(ScheduleManager obj){
     }
 }
 
-/*
+
 void fillOccupation(const ScheduleManager& obj){
     std::vector<Student> students = obj.getStudents();
     for(const Student& s : students){
@@ -32,7 +31,8 @@ void fillOccupation(const ScheduleManager& obj){
     }
 }
 */
-void ocupations(){
+
+void occupations(){
     short ocupationChoice;
     std::string classCode, year, ucCode;
     std::cout << "Ocupacao de?" << std::endl;
@@ -60,6 +60,12 @@ void ocupations(){
     }
 }
 
+void showSchedule(){
+    std::string stuName;
+    std::cout << "Student name: "; std::cin >> stuName;
+    
+}
+
 int main(){
     short choice;
     ScheduleManager obj;
@@ -70,10 +76,11 @@ int main(){
 
     switch (choice) {
         case 1:
-            ocupations();
+            occupations();
             break;
 
         case 2:
+            showSchedule();
             break;
 
         case 3:
