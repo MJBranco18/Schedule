@@ -19,15 +19,23 @@ void test(ScheduleManager obj){
     std::vector<Student> students = obj.getStudents();
     for(Student s : students){
         std::cout << s.getName() << " - " << s.getStuCode() <<  " - ";
-        for(ClassUc c : s.getClasses()) std::cout << c.get_ucCode() << " - " << c.get_classCode() << std::endl;
+        for(ClassUc c : s.getClasses()) std::cout << c.get_ucCode() << " - " << c.get_classCode() << " - " << c.get_occupation()<<  std::endl;
     }
 }
 
+
+void fillOccupation(const ScheduleManager& obj){
+    std::vector<Student> students = obj.getStudents();
+    for(const Student& s : students){
+        for(ClassUc c : s.getClasses()) c.set_occupation(c.get_occupation() + 1);
+    }
+}
 
 int main(){
     int choice;
     ScheduleManager obj;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
+    fillOccupation(obj);
     test(obj);
     showMenu(); std::cin >> choice;
 
@@ -43,6 +51,6 @@ int main(){
         default:
             break;
     }
-    //test(obj);
+    test(obj);
     return 0;
 }
