@@ -23,3 +23,6 @@ void ClassUc::set_ucCode(std::string ucCode) {
 void ClassUc::set_classCode(std::string classCode) {
     this->classCode = classCode;
 }
+
+
+

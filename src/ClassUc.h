@@ -8,8 +8,10 @@ class ClassUc {
 private:
     std::string ucCode, classCode;
 public:
+
     ClassUc();
     ClassUc(std::string ucCode, std::string classCode);
+
     std::string get_ucCode() const;
     std::string get_classCode() const;
     void set_ucCode(std::string ucCode);
