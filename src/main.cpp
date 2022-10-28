@@ -4,6 +4,7 @@
 #include "Student.h"
 #include "Slot.h"
 #include "ClassUc.h"
+#include <stdlib.h>
 
 void showMenu(){
     std::cout << "------------------- Menu -------------------" << std::endl;
@@ -23,34 +24,67 @@ void test(ScheduleManager obj){
     }
 }
 
-
+/*
 void fillOccupation(const ScheduleManager& obj){
     std::vector<Student> students = obj.getStudents();
     for(const Student& s : students){
         for(ClassUc c : s.getClasses()) c.set_occupation(c.get_occupation() + 1);
     }
 }
-
-int main(){
-    int choice;
-    ScheduleManager obj;
-    obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    fillOccupation(obj);
-    test(obj);
-    showMenu(); std::cin >> choice;
-
-    switch (choice) {
+*/
+void ocupations(){
+    short ocupationChoice;
+    std::string classCode, year, ucCode;
+    std::cout << "Ocupacao de?" << std::endl;
+    std::cout << "1- Turma" << std::endl;
+    std::cout << "2- Ano" << std::endl;
+    std::cout << "3- UC\n" << std::endl;
+    std::cin >> ocupationChoice;
+    switch (ocupationChoice) {
         case 1:
+            std::cout << "Inserir turma: "; std::cin >> classCode;
+            //fazer função de ocupação para a turma recebida
             break;
+
         case 2:
+            std::cout << "Inserir ano: "; std::cin >> year;
+            //fazer função de ocupação para o ano recebido
             break;
+
         case 3:
-            break;
-        case 4:
+            std::cout << "Inserir UC: "; std::cin >> ucCode;
+            //fazer função de ocupação para a turma recebida
             break;
         default:
             break;
     }
-    test(obj);
+}
+
+int main(){
+    short choice;
+    ScheduleManager obj;
+    obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
+    //fillOccupation(obj);
+    //test(obj);
+    showMenu(); std::cin >> choice;
+
+    switch (choice) {
+        case 1:
+            ocupations();
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            break;
+
+        default:
+            break;
+    }
+    //test(obj);
     return 0;
 }
