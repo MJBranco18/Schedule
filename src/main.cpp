@@ -5,6 +5,7 @@
 #include "Slot.h"
 #include "ClassUc.h"
 #include <vector>
+
 ScheduleManager obj;
 
 void showMenu(){
@@ -17,7 +18,7 @@ void showMenu(){
 }
 
 
-void test(ScheduleManager obj){
+void test(){
     std::vector<Student> students = obj.getStudents();
     for(Student s : students){
         std::cout << s.getName() << " - " << s.getStuCode() <<  ":" << std::endl;
@@ -29,15 +30,6 @@ void test(ScheduleManager obj){
         std::cout << std::endl;
     }
 }
-
-/*
-void fillOccupation(const ScheduleManager& obj){
-    std::vector<Student> students = obj.getStudents();
-    for(const Student& s : students){
-        for(ClassUc c : s.getClasses()) c.set_occupation(c.get_occupation() + 1);
-    }
-}
-*/
 
 bool orderUc(Student s1, Student s2){
     std::vector<ClassUc> classesS1 = s1.getClasses();
@@ -91,8 +83,8 @@ void showSchedule(){
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    //fillOccupation(obj);
-    test(obj);
+    test();
+
     /*
     showMenu(); std::cin >> choice;
 
@@ -115,6 +107,6 @@ int main(){
             break;
     }
      */
-    //test(obj);
+
     return 0;
 }
