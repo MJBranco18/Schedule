@@ -4,6 +4,8 @@
 #include "Student.h"
 #include "Slot.h"
 #include "ClassUc.h"
+#include <vector>
+ScheduleManager obj;
 
 void showMenu(){
     std::cout << "------------------- Menu -------------------" << std::endl;
@@ -14,16 +16,21 @@ void showMenu(){
     std::cout << "--------------------------------------------" << std::endl;
 }
 
-/*
+
 void test(ScheduleManager obj){
     std::vector<Student> students = obj.getStudents();
     for(Student s : students){
-        std::cout << s.getName() << " - " << s.getStuCode() <<  " - ";
-        for(ClassUc c : s.getClasses()) std::cout << c.get_ucCode() << " - " << c.get_classCode() << " - " << c.get_occupation()<<  std::endl;
+        std::cout << s.getName() << " - " << s.getStuCode() <<  ":" << std::endl;
+        int count = 0;
+        for(ClassUc c : s.getClasses()){
+            std::cout << count << "- " << c.get_ucCode() << " - " << c.get_classCode() <<  std::endl;
+            count++;
+        }
+        std::cout << std::endl;
     }
 }
 
-
+/*
 void fillOccupation(const ScheduleManager& obj){
     std::vector<Student> students = obj.getStudents();
     for(const Student& s : students){
@@ -32,33 +39,48 @@ void fillOccupation(const ScheduleManager& obj){
 }
 */
 
+bool orderUc(Student s1, Student s2){
+    std::vector<ClassUc> classesS1 = s1.getClasses();
+
+    return false;
+}
+
+void occupationsPerUc(){
+    std::vector<Student> students = obj.getStudents();
+
+    for(Student s : students){
+
+    }
+}
+
 void occupations(){
-    short ocupationChoice;
-    std::string classCode, year, ucCode;
-    std::cout << "Ocupacao de?" << std::endl;
-    std::cout << "1- Turma" << std::endl;
-    std::cout << "2- Ano" << std::endl;
-    std::cout << "3- UC\n" << std::endl;
-    std::cin >> ocupationChoice;
-    switch (ocupationChoice) {
+    short choice;
+    std::string year, ucCode;
+    std::cout << "Inserir ano: "; std::cin >> year;
+    std::cout << "Inserir UC: "; std::cin >> ucCode;
+
+    std::cout << "\n1- Ordenar por UC" << std::endl;
+    std::cout << "2- Ordenacao crescente" << std::endl;
+    std::cout << "3- Ordenacao decrescente" << std::endl;
+    std::cin >> choice;
+
+    switch (choice) {
         case 1:
-            std::cout << "Inserir turma: "; std::cin >> classCode;
-            //fazer função de ocupação para a turma recebida
+            occupationsPerUc();
             break;
 
         case 2:
-            std::cout << "Inserir ano: "; std::cin >> year;
-            //fazer função de ocupação para o ano recebido
             break;
 
         case 3:
-            std::cout << "Inserir UC: "; std::cin >> ucCode;
-            //fazer função de ocupação para a turma recebida
             break;
+
         default:
             break;
+
     }
 }
+
 
 void showSchedule(){
     std::string stuName;
@@ -68,10 +90,10 @@ void showSchedule(){
 
 int main(){
     short choice;
-    ScheduleManager obj;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
     //fillOccupation(obj);
-    //test(obj);
+    test(obj);
+    /*
     showMenu(); std::cin >> choice;
 
     switch (choice) {
@@ -92,6 +114,7 @@ int main(){
         default:
             break;
     }
+     */
     //test(obj);
     return 0;
 }

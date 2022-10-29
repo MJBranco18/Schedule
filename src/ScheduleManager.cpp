@@ -63,7 +63,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         schedule.push_back(current_scheduleUc);
     }
 
-    //read students_class.csv
+    //read students_classes.csv
     while(std::getline(in3,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
@@ -75,13 +75,28 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setName(temp[1]);
         current_classUc.set_ucCode(temp[2]);
         current_classUc.set_classCode(temp[3]);
+
         current_scheduleUc.set_classUc(current_classUc);
 
-        std::vector<ClassUc> classStudents;
-        classStudents.push_back(current_classUc);
-        current_student.setClasses(classStudents);
-        students.push_back(current_student);
-        schedule.push_back(current_scheduleUc);
+        std::vector<ClassUc> classes;
+        classes.push_back(current_classUc);
+        current_student.setClasses(classes);
+
+        this->students.push_back(current_student);
+
+        this->schedule.push_back(current_scheduleUc);
+    }
+
+    for(int i = 0; i < this->students.size(); i++){
+        for(int j = i + 1; j < this->students.size(); j++){
+            if(this->students[j].getName() == this->students[i].getName()){
+                current_classUc.set_classCode(this->students[j].getClasses()[0].get_classCode());
+                current_classUc.set_ucCode(this->students[j].getClasses()[0].get_ucCode());
+                this->students.erase(this->students.begin() + j);
+                j--;
+                this->students[i].addClass(current_classUc);
+            }
+        }
     }
 
 }
