@@ -20,7 +20,7 @@ void showMenu(){
 
 void test(){
     std::vector<ScheduleUc> schedules = obj.getSchedule();
-    for(ScheduleUc s : schedules){
+    for(const ScheduleUc& s : schedules){
         std::cout << "\n" << s.get_classUc().get_ucCode() << " - " << s.get_classUc().get_classCode() <<  ":" << std::endl;
 
         for(Slot slot : s.get_ucClassSchedule()){
@@ -62,7 +62,7 @@ void occupations(){
     for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
 
     for(const Student& student : students){
-        for(ClassUc currClassUc : student.getClasses()){
+        for(const ClassUc& currClassUc : student.getClasses()){
             if(ucCode == currClassUc.get_ucCode() && year == currClassUc.get_classCode().substr(0,1)){
                 int _class = std::stoi(currClassUc.get_classCode().substr(5));
                 occupations[_class-1].second++;
@@ -97,26 +97,30 @@ void occupations(){
 void showSchedule(){
     std::string stuName;
     std::vector<Student> students = obj.getStudents();
-    std::vector<ScheduleUc> scheduleUc = obj.getSchedule();
+    ScheduleUc studentClasses;
+    std::vector<ScheduleUc> scheduleUc = obj.getSchedule(), studentSchedule;
     std::vector<Slot> classesCurrentScheduleUc;
+    std::vector<std::vector<ScheduleUc>> sm; //matriz para colocar as aulas
+
     std::cout << "Student name: "; std::cin >> stuName;
 
-    for(Student student : students){
+    for(const Student& student : students){
         if(student.getName() == stuName){
-            for(ClassUc classUc : student.getClasses()){
-                for(ScheduleUc currentScheduleUc : scheduleUc){
+            for(const ClassUc& classUc : student.getClasses()){
+                for(const ScheduleUc& currentScheduleUc : scheduleUc){
                     if(classUc.get_classCode() == currentScheduleUc.get_classUc().get_classCode()
-                    && classUc.get_ucCode() == currentScheduleUc.get_classUc().get_ucCode())
+                    && classUc.get_ucCode() == currentScheduleUc.get_classUc().get_ucCode()){
                         classesCurrentScheduleUc = currentScheduleUc.get_ucClassSchedule();
-
+                        studentClasses.set_ucClassSchedule(classesCurrentScheduleUc);
+                        studentClasses.set_classUc({classUc.get_ucCode(),classUc.get_classCode()});
+                        studentSchedule.push_back(studentClasses);
+                    }
                 }
             }
         }
     }
 
-    //std::vector<std::vector<>> sm; //matriz para colocar as aulas
-
-    std::cout << "\n" << stuName << "'s classes: " << std::endl;
+    std::cout << "\n" << stuName << "'s schedule: " << std::endl;
 
     std::cout << "------------------------------------------------------------------------------------------" << std::endl;
     std::cout << "|        |    Segunda    |     Terça     |    Quarta     |    Quinta     |     Sexta     |" << std::endl;
