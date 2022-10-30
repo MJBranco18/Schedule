@@ -40,7 +40,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         schedule.push_back(current_scheduleUc);
     }
 */
-    //reads classes.csv
+    //reads file 2 - classes.csv
     while(std::getline(in2,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
@@ -53,17 +53,30 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_slot.set_day(temp[2]);
         current_slot.set_startHour(std::stod(temp[3]));
         current_slot.set_duration(std::stod(temp[4]));
-        current_slot.set_type(temp[5]);
+        current_slot.set_type(temp[5].substr(0,temp[5].size() - 1));
 
-        std::vector<Slot> ucClSch = current_scheduleUc.get_ucClassSchedule();
+        std::vector<Slot> ucClSch;
         ucClSch.push_back(current_slot);
         current_scheduleUc.set_ucClassSchedule(ucClSch);
         current_scheduleUc.set_classUc(current_classUc);
 
-        schedule.push_back(current_scheduleUc);
+        this->schedule.push_back(current_scheduleUc);
     }
 
-    //read students_class.csv
+    //file 2 - clean data
+    for(int i = 0; i < this->schedule.size(); i++){
+        for(int j = i + 1; j < this->schedule.size(); j++){
+            if(this->schedule[j].get_classUc().get_classCode() == this->schedule[i].get_classUc().get_classCode()
+               && this->schedule[j].get_classUc().get_ucCode() == this->schedule[i].get_classUc().get_ucCode() ){
+                current_slot = this->schedule[j].get_ucClassSchedule()[0];
+                this->schedule.erase(this->schedule.begin() + j);
+                j--;
+                this->schedule[i].addSlot(current_slot);
+            }
+        }
+    }
+
+    //reads file 3 - students_classes.csv
     while(std::getline(in3,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
@@ -74,14 +87,28 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setStuCode(std::stol(temp[0]));
         current_student.setName(temp[1]);
         current_classUc.set_ucCode(temp[2]);
-        current_classUc.set_classCode(temp[3]);
+        current_classUc.set_classCode(temp[3].substr(0,temp[3].size()-1));
+
         current_scheduleUc.set_classUc(current_classUc);
 
-        std::vector<ClassUc> classStudents;
-        classStudents.push_back(current_classUc);
-        current_student.setClasses(classStudents);
-        students.push_back(current_student);
-        schedule.push_back(current_scheduleUc);
+        std::vector<ClassUc> classes;
+        classes.push_back(current_classUc);
+        current_student.setClasses(classes);
+
+        this->students.push_back(current_student);
+    }
+
+    //file 3 - clean data
+    for(int i = 0; i < this->students.size(); i++){
+        for(int j = i + 1; j < this->students.size(); j++){
+            if(this->students[j].getName() == this->students[i].getName()){
+                current_classUc.set_classCode(this->students[j].getClasses()[0].get_classCode());
+                current_classUc.set_ucCode(this->students[j].getClasses()[0].get_ucCode());
+                this->students.erase(this->students.begin() + j);
+                j--;
+                this->students[i].addClass(current_classUc);
+            }
+        }
     }
 
 }
