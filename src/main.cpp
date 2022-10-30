@@ -31,26 +31,43 @@ void test(){
     }
 }
 
-void occupationsPerUc(std::string year, std::string ucCode){
-    std::vector<Student> students = obj.getStudents();
-    int occupations[16] = {0};
-    for(const Student& student : students){
-        for(ClassUc currClassUc : student.getClasses()){
-            if(ucCode == currClassUc.get_ucCode() && year == currClassUc.get_classCode().substr(0,1)){
-                int _class = std::stoi(currClassUc.get_classCode().substr(5));
-                occupations[_class-1]++;
-            }
-        }
-    }
+bool occupationsCresc(std::pair<int,int> p1, std::pair<int,int> p2){
+    if(p1.second < p2.second) return true;
+    if(p1.second > p2.second) return false;
+    //if p1.second == p2.second
+    if(p1.first < p2.first) return true;
+    if(p1.first > p2.first) return false;
+    return false;
+}
 
-    for(int i = 1; i <= 16; i++) std::cout << "Turma " << i << ": " << occupations[i-1] << std::endl;
+bool occupationsDecresc(std::pair<int,int> p1, std::pair<int,int> p2){
+    if(p1.second > p2.second) return true;
+    if(p1.second < p2.second) return false;
+    //if p1.second == p2.second
+    if(p1.first > p2.first) return true;
+    if(p1.first < p2.first) return false;
+    return false;
 }
 
 void occupations(){
     short choice;
     std::string year, ucCode;
-    std::cout << "Inserir ano: "; std::cin >> year;
+    std::vector<Student> students = obj.getStudents();
+
+    std::vector<std::pair<int,int>> occupations(16,{0,0});
+    std::cout << "\nInserir ano: "; std::cin >> year;
     std::cout << "Inserir UC: "; std::cin >> ucCode;
+
+    for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
+
+    for(const Student& student : students){
+        for(ClassUc currClassUc : student.getClasses()){
+            if(ucCode == currClassUc.get_ucCode() && year == currClassUc.get_classCode().substr(0,1)){
+                int _class = std::stoi(currClassUc.get_classCode().substr(5));
+                occupations[_class-1].second++;
+            }
+        }
+    }
 
     std::cout << "\n1- Ordenar por UC" << std::endl;
     std::cout << "2- Ordenacao crescente" << std::endl;
@@ -59,18 +76,18 @@ void occupations(){
 
     switch (choice) {
         case 1:
-            occupationsPerUc(year, ucCode);
+            for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
-
         case 2:
+            std::sort(occupations.begin(),occupations.end(), occupationsCresc);
+            for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
-
         case 3:
+            std::sort(occupations.begin(),occupations.end(), occupationsDecresc);
+            for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
-
         default:
             break;
-
     }
 }
 
