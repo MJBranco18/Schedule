@@ -22,3 +22,7 @@ ClassUc ScheduleUc::get_classUc() const {
 std::vector<Slot> ScheduleUc::get_ucClassSchedule() const {
     return this->ucClassSchedule;
 }
+
+void ScheduleUc::addSlot(Slot slot) {
+    this->ucClassSchedule.push_back(slot);
+}

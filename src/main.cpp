@@ -19,14 +19,15 @@ void showMenu(){
 
 
 void test(){
-    std::vector<Student> students = obj.getStudents();
-    for(Student s : students){
-        std::cout << s.getName() << " - " << s.getStuCode() <<  ":" << std::endl;
-        int count = 0;
-        for(ClassUc c : s.getClasses()){
-            std::cout << count << "- " << c.get_ucCode() << " - " << c.get_classCode() <<  std::endl;
-            count++;
+    std::vector<ScheduleUc> schedules = obj.getSchedule();
+    for(ScheduleUc s : schedules){
+        std::cout << "\n" << s.get_classUc().get_ucCode() << " - " << s.get_classUc().get_classCode() <<  ":" << std::endl;
+
+        for(Slot slot : s.get_ucClassSchedule()){
+            std::cout << slot.get_day() << " at " << slot.get_startHour() << " during "
+                      << slot.get_duration() << " hours and type of class is " << slot.get_type() << std::endl;
         }
+
         std::cout << std::endl;
     }
 }
@@ -87,6 +88,7 @@ void occupations(){
             for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
         default:
+            //colocar erro
             break;
     }
 }
@@ -94,15 +96,41 @@ void occupations(){
 
 void showSchedule(){
     std::string stuName;
+    std::vector<Student> students = obj.getStudents();
+    std::vector<ScheduleUc> scheduleUc = obj.getSchedule();
+    std::vector<Slot> classesCurrentScheduleUc;
     std::cout << "Student name: "; std::cin >> stuName;
-    
+
+    for(Student student : students){
+        if(student.getName() == stuName){
+            for(ClassUc classUc : student.getClasses()){
+                for(ScheduleUc currentScheduleUc : scheduleUc){
+                    if(classUc.get_classCode() == currentScheduleUc.get_classUc().get_classCode()
+                    && classUc.get_ucCode() == currentScheduleUc.get_classUc().get_ucCode())
+                        classesCurrentScheduleUc = currentScheduleUc.get_ucClassSchedule();
+
+                }
+                std::cout << student.getName() << "'s classes: " << std::endl;
+                for(Slot slot : classesCurrentScheduleUc){
+                    std::cout << classUc.get_ucCode() << " - " << classUc.get_classCode()
+                              << " at " << slot.get_day() << " at " << slot.get_startHour() << " during "
+                              << slot.get_duration() << " type of class is " << slot.get_type() << std::endl;
+                }
+            }
+        }
+    }
+
+    /*
+    std::cout << "-------- |Segunda| --------------------------------------------------------------------" << std::endl;
+    std::cout << "|  8:00  | " <<
+     */
 }
 
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-
-
+    test();
+    /*
     showMenu(); std::cin >> choice;
 
     switch (choice) {
@@ -123,7 +151,7 @@ int main(){
         default:
             break;
     }
-     
+     */
 
     return 0;
 }

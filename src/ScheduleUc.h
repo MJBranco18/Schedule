@@ -16,6 +16,7 @@ public:
     void set_ucClassSchedule(std::vector<Slot> ucClassSchedule);
     ClassUc get_classUc() const;
     std::vector<Slot> get_ucClassSchedule() const;
+    void addSlot(Slot slot);
 };
 
 

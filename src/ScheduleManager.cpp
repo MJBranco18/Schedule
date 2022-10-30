@@ -40,7 +40,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         schedule.push_back(current_scheduleUc);
     }
 */
-    //reads classes.csv
+    //reads file 2 - classes.csv
     while(std::getline(in2,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
@@ -55,15 +55,28 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_slot.set_duration(std::stod(temp[4]));
         current_slot.set_type(temp[5]);
 
-        std::vector<Slot> ucClSch = current_scheduleUc.get_ucClassSchedule();
+        std::vector<Slot> ucClSch;
         ucClSch.push_back(current_slot);
         current_scheduleUc.set_ucClassSchedule(ucClSch);
         current_scheduleUc.set_classUc(current_classUc);
 
-        schedule.push_back(current_scheduleUc);
+        this->schedule.push_back(current_scheduleUc);
     }
 
-    //read students_classes.csv
+    //file 2 - clean data
+    for(int i = 0; i < this->schedule.size(); i++){
+        for(int j = i + 1; j < this->schedule.size(); j++){
+            if(this->schedule[j].get_classUc().get_classCode() == this->schedule[i].get_classUc().get_classCode()
+               && this->schedule[j].get_classUc().get_ucCode() == this->schedule[i].get_classUc().get_ucCode() ){
+                current_slot = this->schedule[j].get_ucClassSchedule()[0];
+                this->schedule.erase(this->schedule.begin() + j);
+                j--;
+                this->schedule[i].addSlot(current_slot);
+            }
+        }
+    }
+
+    //reads file 3 - students_classes.csv
     while(std::getline(in3,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
@@ -83,10 +96,9 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setClasses(classes);
 
         this->students.push_back(current_student);
-
-        this->schedule.push_back(current_scheduleUc);
     }
 
+    //file 3 - clean data
     for(int i = 0; i < this->students.size(); i++){
         for(int j = i + 1; j < this->students.size(); j++){
             if(this->students[j].getName() == this->students[i].getName()){
