@@ -103,18 +103,18 @@ void showSchedule(){
 
     for(Student student : students){
         if(student.getName() == stuName){
+            std::cout << student.getName() << "'s classes: " << std::endl;
             for(ClassUc classUc : student.getClasses()){
+                std::cout << "\n" << classUc.get_ucCode() << " - " << classUc.get_classCode() << ":" << std::endl;
                 for(ScheduleUc currentScheduleUc : scheduleUc){
                     if(classUc.get_classCode() == currentScheduleUc.get_classUc().get_classCode()
                     && classUc.get_ucCode() == currentScheduleUc.get_classUc().get_ucCode())
                         classesCurrentScheduleUc = currentScheduleUc.get_ucClassSchedule();
 
                 }
-                std::cout << student.getName() << "'s classes: " << std::endl;
                 for(Slot slot : classesCurrentScheduleUc){
-                    std::cout << classUc.get_ucCode() << " - " << classUc.get_classCode()
-                              << " at " << slot.get_day() << " at " << slot.get_startHour() << " during "
-                              << slot.get_duration() << " type of class is " << slot.get_type() << std::endl;
+                    std::cout << slot.get_day() << " at " << slot.get_startHour() << " during "
+                              << slot.get_duration() << " hours and type of class is " << slot.get_type() << std::endl;
                 }
             }
         }
@@ -129,8 +129,8 @@ void showSchedule(){
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    test();
-    /*
+    //test();
+
     showMenu(); std::cin >> choice;
 
     switch (choice) {
@@ -151,7 +151,7 @@ int main(){
         default:
             break;
     }
-     */
+
 
     return 0;
 }
