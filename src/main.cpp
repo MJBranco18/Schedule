@@ -5,6 +5,7 @@
 #include "Slot.h"
 #include "ClassUc.h"
 #include <vector>
+#include <algorithm>
 
 ScheduleManager obj;
 
@@ -87,6 +88,9 @@ void occupations(){
             std::sort(occupations.begin(),occupations.end(), occupationsDecresc);
             for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
+        case 0: //voltar para trás
+            showMenu();
+
         default:
             //colocar erro
             break;
@@ -156,7 +160,7 @@ void showSchedule(){
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    //test();
+    test();
 
     showMenu(); std::cin >> choice;
 
