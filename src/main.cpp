@@ -103,27 +103,50 @@ void showSchedule(){
 
     for(Student student : students){
         if(student.getName() == stuName){
-            std::cout << student.getName() << "'s classes: " << std::endl;
             for(ClassUc classUc : student.getClasses()){
-                std::cout << "\n" << classUc.get_ucCode() << " - " << classUc.get_classCode() << ":" << std::endl;
                 for(ScheduleUc currentScheduleUc : scheduleUc){
                     if(classUc.get_classCode() == currentScheduleUc.get_classUc().get_classCode()
                     && classUc.get_ucCode() == currentScheduleUc.get_classUc().get_ucCode())
                         classesCurrentScheduleUc = currentScheduleUc.get_ucClassSchedule();
 
                 }
-                for(Slot slot : classesCurrentScheduleUc){
-                    std::cout << slot.get_day() << " at " << slot.get_startHour() << " during "
-                              << slot.get_duration() << " hours and type of class is " << slot.get_type() << std::endl;
-                }
             }
         }
     }
 
-    /*
-    std::cout << "-------- |Segunda| --------------------------------------------------------------------" << std::endl;
-    std::cout << "|  8:00  | " <<
-     */
+    //std::vector<std::vector<>> sm; //matriz para colocar as aulas
+
+    std::cout << "\n" << stuName << "'s classes: " << std::endl;
+
+    std::cout << "------------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "|        |    Segunda    |     Terça     |    Quarta     |    Quinta     |     Sexta     |" << std::endl;
+    std::cout << "|----------------------------------------------------------------------------------------|" << std::endl;
+    std::cout << "|  8:00  |" << std::endl;
+    std::cout << "|  8:30  |" << std::endl;
+    std::cout << "|  9:00  |" << std::endl;
+    std::cout << "|  9:30  |" << std::endl;
+    std::cout << "| 10:00  |" << std::endl;
+    std::cout << "| 10:30  |" << std::endl;
+    std::cout << "| 11:00  |" << std::endl;
+    std::cout << "| 11:30  |" << std::endl;
+    std::cout << "| 12:00  |" << std::endl;
+    std::cout << "| 12:30  |" << std::endl;
+    std::cout << "| 13:00  |" << std::endl;
+    std::cout << "| 13:30  |" << std::endl;
+    std::cout << "| 14:00  |" << std::endl;
+    std::cout << "| 14:30  |" << std::endl;
+    std::cout << "| 15:00  |" << std::endl;
+    std::cout << "| 15:30  |" << std::endl;
+    std::cout << "| 16:00  |" << std::endl;
+    std::cout << "| 16:30  |" << std::endl;
+    std::cout << "| 17:00  |" << std::endl;
+    std::cout << "| 17:30  |" << std::endl;
+    std::cout << "| 18:00  |" << std::endl;
+    std::cout << "| 18:30  |" << std::endl;
+    std::cout << "| 19:00  |" << std::endl;
+    std::cout << "| 19:30  |" << std::endl;
+    std::cout << "-----------------------------------------------------------------------------------------" << std::endl;
+
 }
 
 int main(){
