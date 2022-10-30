@@ -31,18 +31,19 @@ void test(){
     }
 }
 
-bool orderUc(Student s1, Student s2){
-    std::vector<ClassUc> classesS1 = s1.getClasses();
-
-    return false;
-}
-
-void occupationsPerUc(){
+void occupationsPerUc(std::string year, std::string ucCode){
     std::vector<Student> students = obj.getStudents();
-
-    for(Student s : students){
-
+    int occupations[16] = {0};
+    for(const Student& student : students){
+        for(ClassUc currClassUc : student.getClasses()){
+            if(ucCode == currClassUc.get_ucCode() && year == currClassUc.get_classCode().substr(0,1)){
+                int _class = std::stoi(currClassUc.get_classCode().substr(5));
+                occupations[_class-1]++;
+            }
+        }
     }
+
+    for(int i = 1; i <= 16; i++) std::cout << "Turma " << i << ": " << occupations[i-1] << std::endl;
 }
 
 void occupations(){
@@ -58,7 +59,7 @@ void occupations(){
 
     switch (choice) {
         case 1:
-            occupationsPerUc();
+            occupationsPerUc(year, ucCode);
             break;
 
         case 2:
@@ -83,9 +84,8 @@ void showSchedule(){
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    test();
 
-    /*
+
     showMenu(); std::cin >> choice;
 
     switch (choice) {
@@ -106,7 +106,7 @@ int main(){
         default:
             break;
     }
-     */
+     
 
     return 0;
 }
