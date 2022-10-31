@@ -2,6 +2,6 @@ Mini-Tarefas (V-está feito)
 
 fazer com que ao pedir input de uc e turma seja só necessário por o nº;
 mensagens de erro;
-tracinhos menus não principais;
+tracinhos menus não principais;V
 mensagens de ajuda ao input(?);
 ...

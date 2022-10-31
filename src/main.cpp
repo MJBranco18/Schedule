@@ -16,6 +16,7 @@ void showMenu(){
     std::cout << "| 2- Horario                               |" << std::endl;
     std::cout << "| 3- Listar Estudantes                     |" << std::endl;
     std::cout << "| 4- Estudantes com mais n UC's            |" << std::endl;
+    std::cout << "| 5- Alterar horario                       |" << std::endl;
     std::cout << "--------------------------------------------" << std::endl;
 }
 
@@ -79,9 +80,11 @@ void occupations(){
         }
     }
 
-    std::cout << "\n1- Ordenar por UC" << std::endl;
-    std::cout << "2- Ordenacao crescente" << std::endl;
-    std::cout << "3- Ordenacao decrescente" << std::endl;
+    std::cout << "\n--------------------------------" << std::endl;
+    std::cout << "| 1- Ordenar por UC            |"<< std::endl;
+    std::cout << "| 2- Ordenacao crescente       |" << std::endl;
+    std::cout << "| 3- Ordenacao decrescente     |" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
     std::cin >> choice;
 
     switch (choice) {
@@ -177,10 +180,11 @@ void listStudents() {
     std::vector<Student> students = obj.getStudents();
     std::sort(students.begin(),students.end(), alphOrder);
 
-
-    std::cout << "\n1- Listar por ano" << std::endl;
-    std::cout << "2- Listar por UC" << std::endl;
-    std::cout << "3- Listar por turma" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "| 1- Listar por ano            |" << std::endl;
+    std::cout << "| 2- Listar por UC             |" << std::endl;
+    std::cout << "| 3- Listar por turma          |" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
     std::cin >> choice;
 
     switch (choice) {
@@ -257,6 +261,9 @@ int main(){
             break;
 
         case 4:
+            break;
+
+        case 5:
             break;
 
         default:
