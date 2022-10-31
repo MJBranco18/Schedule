@@ -1,6 +1,6 @@
 #include "ScheduleUc.h"
 
-ScheduleUc::ScheduleUc() {}
+ScheduleUc::ScheduleUc() = default;
 
 ScheduleUc::ScheduleUc(ClassUc classUc, std::vector<Slot> ucClassSchedule){
     this->classUc = classUc;
@@ -23,6 +23,6 @@ std::vector<Slot> ScheduleUc::get_ucClassSchedule() const {
     return this->ucClassSchedule;
 }
 
-void ScheduleUc::addSlot(Slot slot) {
+void ScheduleUc::addSlot(const Slot& slot) {
     this->ucClassSchedule.push_back(slot);
 }
