@@ -10,7 +10,7 @@ ScheduleManager::ScheduleManager(std::vector<Student> students, std::vector<Sche
 
 void ScheduleManager::readFiles(const std::string& file1, const std::string& file2, const std::string& file3){
     std::fstream in1, in2, in3;
-    std::string classCode, ucCode, token;
+    std::string token;
     ScheduleUc current_scheduleUc;
     ClassUc current_classUc;
     Student current_student;
@@ -22,24 +22,6 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
     std::getline(in2,token,'\n');  //step var names ahead
     std::getline(in3,token,'\n');  //step var names ahead
 
-
-    //reads classes_per_uc.csv, mas não é preciso porque o classes.csv lê os mesmos ficheiros
-/*
-    while(std::getline(in1,token, '\n')){
-        std::stringstream iss(token);
-
-        unsigned long pos = token.find(',');
-        ucCode = token.substr(0,pos);
-        classCode = token.substr(pos+1);
-
-        current_classUc.set_ucCode(ucCode);
-        current_classUc.set_classCode(classCode);
-
-        current_scheduleUc.set_classUc(current_classUc);
-
-        schedule.push_back(current_scheduleUc);
-    }
-*/
     //reads file 2 - classes.csv
     while(std::getline(in2,token,'\n')){
         std::stringstream iss(token);
@@ -57,7 +39,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_slot.set_day(temp[2]);
         current_slot.set_startHour(std::stod(temp[3]));
         current_slot.set_duration(std::stod(temp[4]));
-        current_slot.set_type(temp[5]/*.substr(0,temp[5].size() - 1)  estava a cortar a última letra */);
+        current_slot.set_type(temp[5]);
 
 
         std::vector<Slot> ucClSch;

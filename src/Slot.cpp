@@ -30,7 +30,7 @@ void Slot::set_duration(double duration) {
     this->duration = duration;
 }
 
-std::string Slot::get_type() {
+std::string Slot::get_type() const{
     return type;
 }
 void Slot::set_type(std::string type) {
