@@ -1,8 +1,8 @@
 #include "Slot.h"
 
-Slot::Slot() {}
+Slot::Slot() = default;
 
-Slot::Slot(std::string day, double startHour, double duration, std::string type){
+Slot::Slot(std::string day, float startHour, float duration, std::string type){
     this->day = day;
     this->startHour = startHour;
     this->duration = duration;
@@ -30,7 +30,7 @@ void Slot::set_duration(double duration) {
     this->duration = duration;
 }
 
-std::string Slot::get_type() {
+std::string Slot::get_type() const{
     return type;
 }
 void Slot::set_type(std::string type) {
