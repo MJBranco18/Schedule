@@ -5,6 +5,8 @@
 #include "Slot.h"
 #include "ClassUc.h"
 #include <vector>
+#include <algorithm>
+
 
 ScheduleManager obj;
 
@@ -14,11 +16,12 @@ void showMenu(){
     std::cout << "| 2- Horario                               |" << std::endl;
     std::cout << "| 3- Listar Estudantes                     |" << std::endl;
     std::cout << "| 4- Estudantes com mais n UC's            |" << std::endl;
+    std::cout << "| 5- Alterar horario                       |" << std::endl;
     std::cout << "--------------------------------------------" << std::endl;
 }
 
 
-void test(){
+void test_schedules(){
     std::vector<ScheduleUc> schedules = obj.getSchedule();
     for(const ScheduleUc& s : schedules){
         std::cout << "\n" << s.get_classUc().get_ucCode() << " - " << s.get_classUc().get_classCode() <<  ":" << std::endl;
@@ -29,6 +32,13 @@ void test(){
         }
 
         std::cout << std::endl;
+    }
+}
+void test_students(){
+    std::vector<Student> students = obj.getStudents();
+    for(Student s : students){
+        std::cout << s.getName() << "-" << s.getStuCode() <<  ":" << std::endl;
+        for(ClassUc c : s.getClasses()) std::cout << c.get_ucCode() << " - " << c.get_classCode() <<  std::endl;
     }
 }
 
@@ -56,7 +66,7 @@ void occupations(){
     std::vector<Student> students = obj.getStudents();
 
     std::vector<std::pair<int,int>> occupations(16,{0,0});
-    std::cout << "\nInserir ano: "; std::cin >> year;
+    std::cout << "\nInserir ano:"; std::cin >> year;
     std::cout << "Inserir UC: "; std::cin >> ucCode;
 
     for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
@@ -70,9 +80,11 @@ void occupations(){
         }
     }
 
-    std::cout << "\n1- Ordenar por UC" << std::endl;
-    std::cout << "2- Ordenacao crescente" << std::endl;
-    std::cout << "3- Ordenacao decrescente" << std::endl;
+    std::cout << "\n--------------------------------" << std::endl;
+    std::cout << "| 1- Ordenar por UC            |"<< std::endl;
+    std::cout << "| 2- Ordenacao crescente       |" << std::endl;
+    std::cout << "| 3- Ordenacao decrescente     |" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
     std::cin >> choice;
 
     switch (choice) {
@@ -87,6 +99,9 @@ void occupations(){
             std::sort(occupations.begin(),occupations.end(), occupationsDecresc);
             for(auto p : occupations) std::cout << "Turma " << p.first << ": " << p.second << std::endl;
             break;
+        case 0: //voltar para trás
+            showMenu();
+
         default:
             //colocar erro
             break;
@@ -153,10 +168,82 @@ void showSchedule(){
 
 }
 
+bool alphOrder(Student s1, Student s2){
+    return s1.getName()<s2.getName();
+}
+
+void listStudents() {
+    short choice;
+    int count = 0;
+    std::string _class, year, ucCode;
+    std::string last = " ";
+    std::vector<Student> students = obj.getStudents();
+    std::sort(students.begin(),students.end(), alphOrder);
+
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "| 1- Listar por ano            |" << std::endl;
+    std::cout << "| 2- Listar por UC             |" << std::endl;
+    std::cout << "| 3- Listar por turma          |" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    std::cin >> choice;
+
+    switch (choice) {
+        case 1:
+            std::cout << "\nInserir ano:" ; std::cin >> year;
+            std::cout << "\nEstudantes do " << year << "o ano: \n" << std::endl;
+            for(Student student : students){
+                for(ClassUc classUc: student.getClasses()){
+                    if(classUc.get_classCode().substr(0,1) == year && student.getName() != last){
+                        count++;
+                        std::cout<< count <<" - " << student.getName() << std::endl;
+                        last = student.getName();
+                    }
+                }
+            }
+            break;
+
+        case 2:
+            std::cout << "Inserir UC:"; std::cin >> ucCode;
+            std::cout << "\nEstudantes de " << ucCode << ":\n" << std::endl;
+            for(Student student : students){
+                for(ClassUc classUc: student.getClasses()){
+                    if(classUc.get_ucCode() == ucCode && student.getName() != last){
+                        count++;
+                        std::cout<< count <<" - "<< student.getName() << std::endl;
+                        last = student.getName();
+                    }
+                }
+            }
+            break;
+
+        case 3:
+            std::cout << "Inserir UC:" ;std::cin >> ucCode;
+            std::cout << "Inserir turma: "; std::cin >> _class;
+            std::cout << "\nEstudantes de " << ucCode <<" da turma " <<_class << ":\n" << std::endl;
+            for(Student student : students){
+                for(ClassUc classUc: student.getClasses()){
+                    if(classUc.get_ucCode() == ucCode && classUc.get_classCode() == _class && student.getName() != last){
+                        count++;
+                        std::cout<< count <<" - " << student.getName() << std::endl;
+                        last = student.getName();
+                    }
+                }
+            }
+            break;
+        case 0: //voltar para trás
+            showMenu();
+
+        default:
+            //colocar erro
+            break;
+    }
+}
+
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    //test();
+    //test_students();
+    //test_schedules()
 
     showMenu(); std::cin >> choice;
 
@@ -170,9 +257,13 @@ int main(){
             break;
 
         case 3:
+            listStudents();
             break;
 
         case 4:
+            break;
+
+        case 5:
             break;
 
         default:

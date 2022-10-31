@@ -57,7 +57,8 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_slot.set_day(temp[2]);
         current_slot.set_startHour(std::stod(temp[3]));
         current_slot.set_duration(std::stod(temp[4]));
-        current_slot.set_type(temp[5]/*.substr(0,temp[5].size() - 1)*/);
+        current_slot.set_type(temp[5]/*.substr(0,temp[5].size() - 1)  estava a cortar a última letra */);
+
 
         std::vector<Slot> ucClSch;
         ucClSch.push_back(current_slot);
@@ -95,7 +96,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setStuCode(std::stol(temp[0]));
         current_student.setName(temp[1]);
         current_classUc.set_ucCode(temp[2]);
-        current_classUc.set_classCode(temp[3]/*.substr(0,temp[3].size()-1)*/);
+        current_classUc.set_classCode(temp[3]);
 
         current_scheduleUc.set_classUc(current_classUc);
 
