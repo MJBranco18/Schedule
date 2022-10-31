@@ -87,7 +87,7 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setStuCode(std::stol(temp[0]));
         current_student.setName(temp[1]);
         current_classUc.set_ucCode(temp[2]);
-        current_classUc.set_classCode(temp[3].substr(0,temp[3].size()-1));
+        current_classUc.set_classCode(temp[3]);
 
         current_scheduleUc.set_classUc(current_classUc);
 
