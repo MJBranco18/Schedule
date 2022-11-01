@@ -12,7 +12,7 @@
 
 ScheduleManager obj;
 
-short showMenu(){
+void showMenu(){
     std::cout << "------------------- Menu -------------------" << std::endl;
     std::cout << "| 1- Ocupacao                              |" << std::endl;
     std::cout << "| 2- Horario                               |" << std::endl;
@@ -245,7 +245,7 @@ void showSchedule(){
     std::cout << "\n" << stuName << "'s schedule: " << std::endl;
 
     std::cout << "------------------------------------------------------------------------------------------" << std::endl;
-    std::cout << "| Início |    Segunda    |     Terça     |    Quarta     |    Quinta     |     Sexta     |" << std::endl;
+    std::cout << "| Inicio |    Segunda    |     Terca     |    Quarta     |    Quinta     |     Sexta     |" << std::endl;
     std::cout << "|--------|---------------|---------------|---------------|---------------|---------------|" << std::endl;
     std::cout << "|  8:00  |" << sm[0][0] << '|' << sm[0][1] << '|' << sm[0][2] << '|' << sm[0][3] << '|' << sm[0][4] << '|' << std::endl;
     std::cout << "|--------|" << sm[1][0] << '|' << sm[1][1] << '|' << sm[1][2] << '|' << sm[1][3] << '|' << sm[1][4] << '|' << std::endl;
@@ -325,7 +325,7 @@ void listStudents() {
                     }
                 }
             }
-            std::cout << "\n Estão inscritos " << count << " estudantes no " << year << "o ano" << std::endl;
+            std::cout << "\nEstao inscritos " << count << " estudantes no " << year << "o ano" << std::endl;
             break;
 
         case 2:
@@ -340,7 +340,7 @@ void listStudents() {
                     }
                 }
             }
-            std::cout << "\n Estão inscritos " << count << " estudantes em " << ucCode << std::endl;
+            std::cout << "\nEstao inscritos " << count << " estudantes em " << ucCode << std::endl;
             break;
 
         case 3:
@@ -372,7 +372,7 @@ void moreThanNUc(){
     short n;
     int count = 0;
     std::vector<Student> students = obj.getStudents();
-    std::cout << "Estudantes inscritos em mais de quantas UC's? "; std::cin >> n;
+    std::cout << "Estudantes inscritos em mais de quantas UC's?"; std::cin >> n;
 
     std::sort(students.begin(),students.end(), alphOrder);
     std::cout << "Estudantes inscritos em mais de " << n << " UC's: \n" << std::endl;
@@ -383,6 +383,6 @@ void moreThanNUc(){
             std::cout << student.getName() << " - "  << student.getStuCode() <<std::endl;
         }
     }
-    std::cout << "\n" << count << "estudantes tem mais de " << n << " UC's"
+    std::cout << "\n" << count << " estudantes tem mais de " << n << " UC's";
 
 }
