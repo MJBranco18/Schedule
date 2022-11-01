@@ -83,7 +83,7 @@ void occupations(){
     }
 
     std::cout << "\n--------------------------------" << std::endl;
-    std::cout << "| 1- Ordenar por UC            |"<< std::endl;
+    std::cout << "| 1- Ordenar por turma         |"<< std::endl;
     std::cout << "| 2- Ordenacao crescente       |" << std::endl;
     std::cout << "| 3- Ordenacao decrescente     |" << std::endl;
     std::cout << "--------------------------------" << std::endl;
