@@ -1,18 +1,16 @@
 Mini-Tarefas (V-está feito)
 
+dar para voltar atrás nos menus;!!
+
 fazer com que ao pedir input de uc e turma seja só necessário por o nº;
-
 mensagens de erro;
-
-tracinhos menus não principais;V
-
 mensagens de ajuda ao input(?);
 
-dar para voltar atrás nos menus;
+ver espaço a seguir a pergunta;
 
-dizer quantos estudantes têm mais de n ucs;
-
+dizer quantos estudantes têm mais de n ucs;V
 organizar o main;V
+tracinhos menus não principais;V
 
 Apagar funções de teste;
 ...
