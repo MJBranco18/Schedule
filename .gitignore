@@ -1,5 +1,5 @@
-.DS_Store
-.idea
+*.DS_Store
+*.idea
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -11,4 +11,4 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
-.log
+*.log
