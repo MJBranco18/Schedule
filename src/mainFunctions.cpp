@@ -204,7 +204,7 @@ void showSchedule(){
     std::vector<std::vector<std::string>> sm(
             43,std::vector<std::string>(5,"---------------")); //matriz para colocar as aulas
 
-    std::cout << "Student name: "; std::cin >> stuName;
+    std::cout << "Nome estudante: "; std::cin >> stuName;
 
     for(const Student& student : students){
         if(student.getName() == stuName){
@@ -370,16 +370,19 @@ void listStudents() {
 
 void moreThanNUc(){
     short n;
+    int count = 0;
     std::vector<Student> students = obj.getStudents();
-    std::cout << "More than how many UC's? "; std::cin >> n;
+    std::cout << "Estudantes inscritos em mais de quantas UC's? "; std::cin >> n;
 
     std::sort(students.begin(),students.end(), alphOrder);
-    std::cout << "Students with more than " << n << " UC's: \n" << std::endl;
+    std::cout << "Estudantes inscritos em mais de " << n << " UC's: \n" << std::endl;
 
     for(const Student& student : students){
         if(student.getClasses().size() > n){
+            count++;
             std::cout << student.getName() << " - "  << student.getStuCode() <<std::endl;
         }
     }
+    std::cout << "\n" << count << "estudantes tem mais de " << n << " UC's"
 
 }
