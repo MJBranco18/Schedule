@@ -1,4 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/guifo/Desktop/Schedule -B /Users/guifo/Desktop/Schedule/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/guifo/Desktop/Schedule/cmake-build-debug
+-- Build files have been written to: C:/Users/35191/Faculdade/AED/Trabalho/Schedule/cmake-build-debug
