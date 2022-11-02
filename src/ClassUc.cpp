@@ -1,6 +1,5 @@
 #include "ClassUc.h"
 
-
 ClassUc::ClassUc() {}
 
 ClassUc::ClassUc(std::string ucCode, std::string classCode){
