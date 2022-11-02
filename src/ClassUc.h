@@ -18,5 +18,4 @@ public:
     void set_classCode(std::string classCode);
 };
 
-
 #endif

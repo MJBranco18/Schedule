@@ -6,4 +6,11 @@
 3	778	1667258426230799458	CMakeFiles/Schedule.dir/src/main.cpp.o	1045c1d9829605de
 8	378	1667245714003980538	CMakeFiles/Schedule.dir/src/ClassUc.cpp.o	a2db1c14847f2415
 2	192	1667247008545773323	CMakeFiles/Schedule.dir/src/Slot.cpp.o	24741ab1ea58e8ab
-0	35	1667331651429034586	build.ninja	f1ecaede02d6a9d7
+0	35	1667332859878586940	build.ninja	f1ecaede02d6a9d7
+3	267	1667332862298221915	CMakeFiles/Schedule.dir/src/Slot.cpp.o	24741ab1ea58e8ab
+2	318	1667332862350249644	CMakeFiles/Schedule.dir/src/ClassUc.cpp.o	a2db1c14847f2415
+3	349	1667332862380636502	CMakeFiles/Schedule.dir/src/Student.cpp.o	4dd0acc1550981b5
+3	349	1667332862380771666	CMakeFiles/Schedule.dir/src/ScheduleUc.cpp.o	9a8088b58c4696b7
+3	457	1667332862488327661	CMakeFiles/Schedule.dir/src/ScheduleManager.cpp.o	73c6aaa679893893
+2	526	1667332862557451335	CMakeFiles/Schedule.dir/src/main.cpp.o	1045c1d9829605de
+526	557	1667332862590393421	Schedule	4abe6880565910c9

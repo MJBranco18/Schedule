@@ -4,9 +4,7 @@
 #include "Slot.h"
 #include "ClassUc.h"
 #include "mainFunctions.cpp"
-#include <string>
 #include <vector>
-
 
 void test_schedules(){
     std::vector<ScheduleUc> schedules = obj.getSchedule();
@@ -30,14 +28,9 @@ void test_students(){
     }
 }
 
-
-
-
 int main(){
     short choice;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-    //test_students();
-    //test_schedules()
 
     showMenu(); std::cin >> choice;
 
@@ -64,7 +57,5 @@ int main(){
         default:
             break;
     }
-
-
     return 0;
 }
