@@ -37,5 +37,5 @@ void Student::addClass(ClassUc _class) {
 }
 
 void Student::removeClass(int pos) {
-    this->classes.erase(classes.begin() +pos);
+    this->classes.erase(classes.begin() + pos);
 }
