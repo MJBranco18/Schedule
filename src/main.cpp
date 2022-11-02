@@ -35,6 +35,7 @@ void test_students(){
 
 int main(){
     short choice;
+    std::string stuName;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
     //test_students();
     //test_schedules()
@@ -47,7 +48,9 @@ int main(){
             break;
 
         case 2:
-            showSchedule();
+            std::cout << "Nome estudante: ";
+            std::cin >> stuName;
+            showSchedule(stuName);
             break;
 
         case 3:
@@ -59,6 +62,7 @@ int main(){
             break;
 
         case 5:
+            changeSchedule();
             break;
 
         default:

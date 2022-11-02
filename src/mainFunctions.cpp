@@ -195,8 +195,7 @@ void durations(const ScheduleUc& currentClass, const Slot& currentSlot, std::vec
     }
 }
 
-void showSchedule(){
-    std::string stuName;
+void showSchedule(const std::string& stuName){
     std::vector<Student> students = obj.getStudents();
     ScheduleUc studentClasses;
     std::vector<ScheduleUc> scheduleUc = obj.getSchedule(), studentSchedule;
@@ -204,7 +203,6 @@ void showSchedule(){
     std::vector<std::vector<std::string>> sm(
             43,std::vector<std::string>(5,"---------------")); //matriz para colocar as aulas
 
-    std::cout << "Nome estudante: "; std::cin >> stuName;
 
     for(const Student& student : students){
         if(student.getName() == stuName){
@@ -385,4 +383,47 @@ void moreThanNUc(){
     }
     std::cout << "\n" << count << " estudantes tem mais de " << n << " UC's";
 
+}
+void changeSchedule(){
+    short choice;
+
+    std::string studentName, classCode, ucCode;
+    std::vector<Student> students = obj.getStudents();
+
+    std::cout << "-----------------------------------------------" << std::endl;
+    std::cout << "| 1- Remover estudante de turma               |" << std::endl;
+    std::cout << "| 2- Adicionar estudante a turma              |" << std::endl;
+    std::cout << "| 3- Alterar turma                            |" << std::endl;
+    std::cout << "| 4- Alterar conjunto de turmas               |" << std::endl;
+    std::cout << "| 0- Voltar ao menu principal                 |" << std::endl;
+    std::cout << "-----------------------------------------------" << std::endl;
+
+    std::cin >> choice;
+
+    switch (choice) {
+        case 0:
+            break;
+        case 1:
+            std::cout << "Nome Estudante: "; std::cin >> studentName;
+            std::cout << "Número turma: "; std::cin >> classCode;
+            std::cout << "Número UC: "; std::cin >> ucCode;
+
+            for(Student student : students){
+                if(student.getName() == studentName){
+                    for(int i=0; i < student.getClasses().size() ; i++){
+                        if(student.getClasses()[i].get_classCode() == classCode){
+                            student.removeClass(i);
+                        }
+                    }
+                }
+            }
+            changeSchedule();
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
 }

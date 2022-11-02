@@ -20,6 +20,7 @@ public:
     void setStuCode(long int stuCode);
     void setClasses(std::vector<ClassUc> classes);
     void addClass(ClassUc _class);
+    void removeClass(int pos);
 
 };
 
