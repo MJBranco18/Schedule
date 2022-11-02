@@ -35,3 +35,7 @@ void Student::setClasses(std::vector<ClassUc> classes){
 void Student::addClass(ClassUc _class) {
     this->classes.push_back(_class);
 }
+
+void Student::removeClass(int pos) {
+    this->classes.erase(classes.begin() +pos);
+}
