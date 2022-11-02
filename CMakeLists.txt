@@ -16,4 +16,4 @@ add_executable(Schedule
         src/Slot.cpp
         src/Slot.h
         src/Student.cpp
-        src/Student.h)
+        src/Student.h src/Order.h src/Order.cpp)
