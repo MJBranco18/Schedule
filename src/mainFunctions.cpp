@@ -593,6 +593,7 @@ bool canAdd(Order& current){
 
 
 void changeSchedule() {
+    ClassUc temp;
     while(!orders.empty()) {
         Order current = orders.front();
         orders.pop();
@@ -625,13 +626,13 @@ void changeSchedule() {
                 break;
 
             case 3: //alterar uma turma por outra
-
                 for (Student &student: obj.getStudents()) {
                     if (student.getName() == current.getStudent().getName()) {
                         for (int i = 0; i < student.getClasses().size(); i++) {
                             if (student.getClasses()[i].get_classCode() == current.getClassUcRem().get_classCode()
                                 && student.getClasses()[i].get_ucCode() == current.getClassUcRem().get_ucCode()) {
                                 student.removeClass(i);
+                                temp = current.getClassUc();
                                 current.getStudent().removeClass(i);
                             }
                         }
@@ -641,6 +642,7 @@ void changeSchedule() {
                 if (canAdd(current)) { // if it can add, adds
                     for (Student &student: obj.getStudents()) {
                         if (student.getName() == current.getStudent().getName()) {
+                            current.getStudent().addClass(temp);
                             student.addClass(current.getClassUc());
                         }
                     }
@@ -654,6 +656,7 @@ void changeSchedule() {
                     }
                 }
                 break;
+
             default:
                 break;
         }
