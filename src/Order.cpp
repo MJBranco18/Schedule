@@ -8,7 +8,21 @@ Order::Order() = default;
 Order::Order(Student student, ClassUc classUc, int type) {
     this->student = student;
     this->type = type;
-    this->classUc = classUc;
+    this->classUc= classUc;
+}
+
+Order::Order(Student student, ClassUc classUcRem, ClassUc classUcAdd, int type) {
+    this->student = student;
+    this->type = type;
+    this->classUcRem = classUcRem;
+    this->classUcAdd = classUcAdd;
+}
+
+Order::Order(Student student, std::vector<ClassUc> classesRem, std::vector<ClassUc> classesAdd, int type) {
+    this->student = student;
+    this->type = type;
+    this->classesRem = classesRem;
+    this->classesAdd = classesAdd;
 }
 
 const Student &Order::getStudent() const {
@@ -34,3 +48,4 @@ ClassUc Order::getClassUc() const {
 void Order::setClassUc(ClassUc classUc){
     this->classUc = classUc;
 }
+

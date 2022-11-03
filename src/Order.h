@@ -11,11 +11,14 @@ class Order{
 private:
     Student student;
     int type;
-    ClassUc classUc;
+    ClassUc classUc, classUcAdd, classUcRem;
+    std::vector<ClassUc> classesAdd, classesRem;
 
 public:
     Order();
     Order(Student student, ClassUc classUc,int type);
+    Order(Student student, ClassUc classUcRem, ClassUc classUcAdd, int type);
+    Order(Student student, std::vector<ClassUc> classesRem, std::vector<ClassUc> classesAdd, int type);
     ClassUc getClassUc() const;
     void setClassUc(ClassUc classUc);
     const Student &getStudent() const;

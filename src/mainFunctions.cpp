@@ -388,7 +388,8 @@ void moreThanNUc(){
 
 void addOrder(){
     short choice = 0;
-    std::string studentName, classCode, ucCode;
+    std::string studentName, classCode, ucCode, classCodeRem, classCodeAdd, ucCodeRem, ucCodeAdd;
+    std::vector<ClassUc> classesAdd, classesRem;
     std::vector<Student> students = obj.getStudents();
 
     std::cout << "-----------------------------------------------" << std::endl;
@@ -400,28 +401,98 @@ void addOrder(){
 
     std::cin >> choice;
 
-    if(choice < 1 && choice > 4){
-        std::cout << "\nEscolha uma opcao valida." << std::endl;
-        return;
-    }
 
-    std::cout << "Nome Estudante: "; std::cin >> studentName;
-    std::cout << "Turma: "; std::cin >> classCode;
-    std::cout << "UC: "; std::cin >> ucCode;
+    switch (choice) {
+        case 1:
+        case 2:
+            std::cout << "Nome Estudante: ";
+            std::cin >> studentName;
+            std::cout << "Turma: ";
+            std::cin >> classCode;
+            std::cout << "UC: ";
+            std::cin >> ucCode;
 
-    for(const Student& student : students){
-        if(student.getName() == studentName){
-            if(choice != 1) {
-                for (const ClassUc &curr: student.getClasses()) {
-                    if (curr.get_ucCode() == ucCode) {
-                        std::cout << "Este estudante ja tem essa UC." << std::endl;
+            for (const Student &student: students) {
+                if (student.getName() == studentName) {
+                    if (choice != 1) {
+                        for (const ClassUc &curr: student.getClasses()) {
+                            if (curr.get_ucCode() == ucCode) {
+                                std::cout << "Este estudante ja tem essa UC." << std::endl;
+                            }
+                        }
                     }
+                    Order _new = Order(student, {ucCode, classCode}, choice);
+                    orders.push(_new);
+                    break;
                 }
             }
-            Order _new = Order(student, {ucCode, classCode},choice);
-            orders.push(_new);
+
+        case 3:
+            std::cout << "Nome Estudante: ";
+            std::cin >> studentName;
+            std::cout << "Turma a remover: ";
+            std::cin >> classCodeRem;
+            std::cout << "UC a remover: ";
+            std::cin >> ucCodeRem;
+            std::cout << "Turma a adicionar: ";
+            std::cin >> classCodeAdd;
+            std::cout << "UC a adicionar: ";
+            std::cin >> ucCodeAdd;
+
+            for (const Student &student: students) {
+                if (student.getName() == studentName) {
+                    if (choice != 1) {
+                        for (const ClassUc &curr: student.getClasses()) {
+                            if (curr.get_ucCode() == ucCodeAdd) {
+                                std::cout << "Este estudante ja tem essa UC." << std::endl;
+                            }
+                        }
+                    }
+                    Order _new = Order(student, {ucCodeRem, classCodeRem},
+                                       {ucCodeAdd, classCodeAdd}, choice);
+                    orders.push(_new);
+                    break;
+                }
+            }
             break;
-        }
+
+        case 4:
+            short n;
+            std::cout << "Nome Estudante: ";
+            std::cin >> studentName;
+            std::cout << "Quantas turmas quer adicionar/remover? "; std::cin >> n;
+            for(int i = 1; i <= n ; i++) {
+                std::cout << "Turma a remover: ";
+                std::cin >> classCodeRem;
+                std::cout << "UC a remover: ";
+                std::cin >> ucCodeRem;
+                std::cout << "Turma a adicionar: ";
+                std::cin >> classCodeAdd;
+                std::cout << "UC a adicionar: ";
+                std::cin >> ucCodeAdd;
+                classesRem.push_back({ucCodeRem,classCodeRem});
+                classesAdd.push_back({ucCodeAdd,classCodeAdd});
+            }
+
+            for (const Student &student: students) {
+                if (student.getName() == studentName) {
+                    if (choice != 1) {
+                        for (const ClassUc &curr: student.getClasses()) {
+                            if (curr.get_ucCode() == ucCode) {
+                                std::cout << "Este estudante ja tem essa UC." << std::endl;
+                            }
+                        }
+                    }
+                    Order _new = Order(student, classesRem, classesAdd, choice);
+                    orders.push(_new);
+                    break;
+                }
+            }
+            break;
+
+        default:
+            std::cout << "\nEscolha uma opcao valida." << std::endl;
+            break;
     }
 }
 
@@ -551,6 +622,7 @@ void changeSchedule() {
                 break;
 
             case 3:
+
                 break;
 
             case 4:
