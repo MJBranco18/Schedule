@@ -90,6 +90,12 @@
 		<Unit filename="C:/Users/35191/Faculdade/AED/Trabalho/Schedule/src/ClassUc.h">
 			<Option target="Schedule"/>
 		</Unit>
+		<Unit filename="C:/Users/35191/Faculdade/AED/Trabalho/Schedule/src/Order.cpp">
+			<Option target="Schedule"/>
+		</Unit>
+		<Unit filename="C:/Users/35191/Faculdade/AED/Trabalho/Schedule/src/Order.h">
+			<Option target="Schedule"/>
+		</Unit>
 		<Unit filename="C:/Users/35191/Faculdade/AED/Trabalho/Schedule/src/ScheduleManager.cpp">
 			<Option target="Schedule"/>
 		</Unit>
