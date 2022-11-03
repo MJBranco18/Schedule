@@ -30,6 +30,10 @@ int main(){
                 break;
 
             case 5:
+                addOrder();
+                break;
+
+            case 6:
                 changeSchedule();
                 break;
 
@@ -38,7 +42,7 @@ int main(){
                 break;
 
             default:
-                std::cout << "\nEscolha uma opcao valida" << std::endl;
+                std::cout << "\nEscolha uma opcao valida." << std::endl;
                 break;
         }
     }

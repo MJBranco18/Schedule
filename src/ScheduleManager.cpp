@@ -114,11 +114,11 @@ void ScheduleManager::setSchedule(std::vector<ScheduleUc> schedule) {
     this->schedule = schedule;
 }
 
-std::vector<Student> ScheduleManager::getStudents() const {
+std::vector<Student>& ScheduleManager::getStudents(){
     return this->students;
 }
 
-std::vector<ScheduleUc> ScheduleManager::getSchedule() const {
+std::vector<ScheduleUc>& ScheduleManager::getSchedule(){
     return this->schedule;
 }
 

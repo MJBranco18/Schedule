@@ -152,6 +152,30 @@ src/ClassUc.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Schedule.dir\build.make CMakeFiles/Schedule.dir/src/ClassUc.cpp.s
 .PHONY : src/ClassUc.cpp.s
 
+src/Order.obj: src/Order.cpp.obj
+.PHONY : src/Order.obj
+
+# target to build an object file
+src/Order.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Schedule.dir\build.make CMakeFiles/Schedule.dir/src/Order.cpp.obj
+.PHONY : src/Order.cpp.obj
+
+src/Order.i: src/Order.cpp.i
+.PHONY : src/Order.i
+
+# target to preprocess a source file
+src/Order.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Schedule.dir\build.make CMakeFiles/Schedule.dir/src/Order.cpp.i
+.PHONY : src/Order.cpp.i
+
+src/Order.s: src/Order.cpp.s
+.PHONY : src/Order.s
+
+# target to generate assembly for a file
+src/Order.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Schedule.dir\build.make CMakeFiles/Schedule.dir/src/Order.cpp.s
+.PHONY : src/Order.cpp.s
+
 src/ScheduleManager.obj: src/ScheduleManager.cpp.obj
 .PHONY : src/ScheduleManager.obj
 
@@ -284,6 +308,9 @@ help:
 	@echo ... src/ClassUc.obj
 	@echo ... src/ClassUc.i
 	@echo ... src/ClassUc.s
+	@echo ... src/Order.obj
+	@echo ... src/Order.i
+	@echo ... src/Order.s
 	@echo ... src/ScheduleManager.obj
 	@echo ... src/ScheduleManager.i
 	@echo ... src/ScheduleManager.s
