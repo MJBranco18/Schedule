@@ -11,20 +11,20 @@ class Order{
 private:
     Student student;
     int type;
-    ClassUc classUc, classUcAdd, classUcRem;
-    std::vector<ClassUc> classesAdd, classesRem;
+    ClassUc classUc, classUcRem;
 
 public:
     Order();
     Order(Student student, ClassUc classUc,int type);
-    Order(Student student, ClassUc classUcRem, ClassUc classUcAdd, int type);
-    Order(Student student, std::vector<ClassUc> classesRem, std::vector<ClassUc> classesAdd, int type);
+    Order(Student student, ClassUc classUcRem, ClassUc classUc, int type);
     ClassUc getClassUc() const;
-    void setClassUc(ClassUc classUc);
-    const Student &getStudent() const;
+    void setClassUc(const ClassUc& classUc);
+    Student getStudent() const;
     void setStudent(const Student &student);
     int getType() const;
     void setType(int type);
+    ClassUc getClassUcRem() const;
+    void setClassUcRem(const ClassUc &classUcRem);
 };
 
 #endif

@@ -11,21 +11,14 @@ Order::Order(Student student, ClassUc classUc, int type) {
     this->classUc= classUc;
 }
 
-Order::Order(Student student, ClassUc classUcRem, ClassUc classUcAdd, int type) {
+Order::Order(Student student, ClassUc classUcRem, ClassUc classUc, int type) {
     this->student = student;
     this->type = type;
     this->classUcRem = classUcRem;
-    this->classUcAdd = classUcAdd;
+    this->classUc = classUc;
 }
 
-Order::Order(Student student, std::vector<ClassUc> classesRem, std::vector<ClassUc> classesAdd, int type) {
-    this->student = student;
-    this->type = type;
-    this->classesRem = classesRem;
-    this->classesAdd = classesAdd;
-}
-
-const Student &Order::getStudent() const {
+Student Order::getStudent() const {
     return this->student;
 }
 
@@ -45,7 +38,16 @@ ClassUc Order::getClassUc() const {
     return this->classUc;
 }
 
-void Order::setClassUc(ClassUc classUc){
+void Order::setClassUc(const ClassUc& classUc){
     this->classUc = classUc;
 }
+
+ClassUc Order::getClassUcRem() const{
+    return classUcRem;
+}
+
+void Order::setClassUcRem(const ClassUc &classUcRem) {
+    Order::classUcRem = classUcRem;
+}
+
 
