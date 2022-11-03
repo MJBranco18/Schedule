@@ -19,7 +19,7 @@ public:
     void setName(std::string name);
     void setStuCode(long int stuCode);
     void setClasses(std::vector<ClassUc> classes);
-    void addClass(ClassUc _class);
+    void addClass(const ClassUc& _class);
     void removeClass(int pos);
 
 };

@@ -32,7 +32,7 @@ void Student::setClasses(std::vector<ClassUc> classes){
     this->classes = classes;
 }
 
-void Student::addClass(ClassUc _class) {
+void Student::addClass(const ClassUc& _class) {
     this->classes.push_back(_class);
 }
 

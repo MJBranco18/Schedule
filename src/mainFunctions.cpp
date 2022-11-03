@@ -14,13 +14,14 @@
 ScheduleManager obj;
 std::queue<Order> orders;
 
+
 void showMenu(){
     std::cout << "\n\n------------------- Menu -------------------" << std::endl;
     std::cout << "| 1- Ocupacao                              |" << std::endl;
     std::cout << "| 2- Horario                               |" << std::endl;
     std::cout << "| 3- Listar Estudantes                     |" << std::endl;
     std::cout << "| 4- Estudantes com mais de n UC's         |" << std::endl;
-    std::cout << "| 5- Alterar horario                       |" << std::endl;
+    std::cout << "| 5- Adicionar pedido de troca de turma    |" << std::endl;
     std::cout << "| 6- Tratar pedidos                        |" << std::endl;
     std::cout << "| 0- Sair                                  |" << std::endl;
     std::cout << "--------------------------------------------" << std::endl;
@@ -28,18 +29,17 @@ void showMenu(){
 
 void occupations(){
     short choice;
-    std::string year, ucCode;
+    std::string ucCode;
     std::vector<Student> students = obj.getStudents();
 
     std::vector<std::pair<int,int>> occupations(16,{0,0});
-    std::cout << "\nInserir ano: "; std::cin >> year;
     std::cout << "Inserir UC: "; std::cin >> ucCode;
 
     for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
 
     for(const Student& student : students){
         for(const ClassUc& currClassUc : student.getClasses()){
-            if(ucCode == currClassUc.get_ucCode() && year == currClassUc.get_classCode().substr(0,1)){
+            if(ucCode == currClassUc.get_ucCode()){
                 int _class = std::stoi(currClassUc.get_classCode().substr(5));
                 occupations[_class-1].second++;
             }
@@ -69,7 +69,7 @@ void occupations(){
             break;
 
         default:
-            std::cout << "\nEscolha uma opção válida" << std::endl;
+            std::cout << "\nEscolha uma opção valida." << std::endl;
             break;
     }
 }
@@ -326,7 +326,7 @@ void listStudents() {
                     }
                 }
             }
-            std::cout << "\nEstao inscritos " << count << " estudantes no " << year << "o ano" << std::endl;
+            std::cout << "\nEstao inscritos " << count << " estudantes no " << year << "o ano." << std::endl;
             break;
 
         case 2:
@@ -341,7 +341,7 @@ void listStudents() {
                     }
                 }
             }
-            std::cout << "\nEstao inscritos " << count << " estudantes em " << ucCode << std::endl;
+            std::cout << "\nEstao inscritos " << count << " estudantes em " << ucCode << "." << std::endl;
             break;
 
         case 3:
@@ -360,7 +360,7 @@ void listStudents() {
             break;
 
         default:
-            std::cout << "\nEscolha uma opcao valida" << std::endl;
+            std::cout << "\nEscolha uma opcao valida." << std::endl;
             break;
     }
 }
@@ -382,7 +382,7 @@ void moreThanNUc(){
             std::cout << student.getName() << " - "  << student.getStuCode() <<std::endl;
         }
     }
-    std::cout << "\n" << count << " estudantes tem mais de " << n << " UC's";
+    std::cout << "\n" << count << " estudantes tem mais de " << n << " UC's.";
 
 }
 
@@ -401,7 +401,7 @@ void addOrder(){
     std::cin >> choice;
 
     if(choice < 1 && choice > 4){
-        std::cout << "\nEscolha uma opcao valida" << std::endl;
+        std::cout << "\nEscolha uma opcao valida." << std::endl;
         return;
     }
 
@@ -411,6 +411,13 @@ void addOrder(){
 
     for(const Student& student : students){
         if(student.getName() == studentName){
+            if(choice != 1) {
+                for (const ClassUc &curr: student.getClasses()) {
+                    if (curr.get_ucCode() == ucCode) {
+                        std::cout << "Este estudante ja tem essa UC." << std::endl;
+                    }
+                }
+            }
             Order _new = Order(student, {ucCode, classCode},choice);
             orders.push(_new);
             break;
@@ -418,35 +425,139 @@ void addOrder(){
     }
 }
 
+bool canAdd(const Order& current){
+    int minOccupation = 10000;
+    std::vector<Student> students = obj.getStudents();
+    std::vector<ScheduleUc> schedule = obj.getSchedule();
+    std::vector<Slot> studentsHours, newClassesHours;
+    int occupation = 0, cap = 25;
+
+    for(const Student& student : students){
+        for(const ClassUc& currClassUc : student.getClasses()){
+            if(current.getClassUc().get_ucCode() == currClassUc.get_ucCode()
+            && current.getClassUc().get_classCode() == currClassUc.get_classCode()){
+                occupation++;
+            }
+        }
+    }
+
+    if(occupation >= cap) {
+        std::cout << "Nao foi possivel adicionar o/a " << current.getStudent().getName() << " a turma " <<
+                  current.getClassUc().get_classCode() << " da UC " <<
+                  current.getClassUc().get_ucCode() << " devido a turma estar cheia." << std::endl;
+        return false;
+    }
+
+
+    //horas da turma do pedido
+    for(const ScheduleUc& currSchedule : schedule){
+        if(currSchedule.get_classUc().get_ucCode() == current.getClassUc().get_ucCode() &&
+           currSchedule.get_classUc().get_classCode() == current.getClassUc().get_classCode()){
+            newClassesHours = currSchedule.get_ucClassSchedule();
+        }
+    }
+
+
+    for(const ClassUc& _class : current.getStudent().getClasses()) {
+        //horas para cada turma do estudante
+        for (const ScheduleUc &currSchedule: schedule) {
+            if (currSchedule.get_classUc().get_ucCode() == _class.get_ucCode() &&
+                currSchedule.get_classUc().get_classCode() == _class.get_classCode()) {
+                studentsHours = currSchedule.get_ucClassSchedule();
+            }
+        }
+
+        for(const Slot& slot1 : studentsHours){
+            for(const Slot& slot2 : newClassesHours){
+                if((slot1.get_day() == slot2.get_day() &&
+                    (slot2.get_startHour() + slot2.get_duration() < slot1.get_startHour() ||
+                     slot2.get_startHour() > slot1.get_startHour() + slot1.get_duration())) || slot1.get_day() != slot2.get_day())
+                    continue;
+                else {
+                    std::cout << "Nao foi possivel adicionar o/a " << current.getStudent().getName() << " a turma " <<
+                              current.getClassUc().get_classCode() << " da UC " <<
+                              current.getClassUc().get_ucCode() << " devido a sobreposicao de horarios."
+                              << std::endl;
+                    return false;
+                }
+            }
+        }
+    }
+
+
+
+
+    std::vector<std::pair<int,int>> occupations(16,{0,0});
+
+    for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
+
+    for(const Student& student : students){
+        for(const ClassUc& currClassUc : student.getClasses()){
+            if(current.getClassUc().get_ucCode() == currClassUc.get_ucCode()){
+                int _class = std::stoi(currClassUc.get_classCode().substr(5));
+                occupations[_class-1].second++;
+            }
+        }
+    }
+
+    for(auto p : occupations){
+        if (p.second == 0) continue;
+
+        if (p.second < minOccupation) minOccupation = p.second;
+    }
+
+    if(occupations[std::stoi(current.getClassUc().get_classCode().substr(5)) - 1].second + 1
+    >= minOccupation + 4) {
+        std::cout << "Nao foi possivel adicionar o/a " << current.getStudent().getName() << " a turma " <<
+                  current.getClassUc().get_classCode() << " da UC " <<
+                  current.getClassUc().get_ucCode() << " devido a uma provocacao de desiquilibrio "
+                                                       "entre turmas." << std::endl;
+        return false;
+    }
+
+    return true;
+}
 
 void changeSchedule() {
-    int cap = 25;
-    Order current = orders.front(); orders.pop();
+    while(!orders.empty()) {
+        Order current = orders.front();
+        orders.pop();
 
-    switch (current.getType()) {
-        case 1: //remover turma
+        switch (current.getType()) {
+            case 1: //remover turma
 
-            for(Student& student : obj.getStudents()){
-                if(student.getName() == current.getStudent().getName()){
-                    for(int i=0; i < student.getClasses().size() ; i++){
-                        if(student.getClasses()[i].get_classCode() == current.getClassUc().get_classCode()
-                        && student.getClasses()[i].get_ucCode() == current.getClassUc().get_ucCode()){
-                            student.removeClass(i);
+                for (Student &student: obj.getStudents()) {
+                    if (student.getName() == current.getStudent().getName()) {
+                        for (int i = 0; i < student.getClasses().size(); i++) {
+                            if (student.getClasses()[i].get_classCode() == current.getClassUc().get_classCode()
+                                && student.getClasses()[i].get_ucCode() == current.getClassUc().get_ucCode()) {
+                                student.removeClass(i);
+                            }
                         }
                     }
                 }
-            }
 
-            std::cout << "Turma removida" << std::endl;
-            break;
+                std::cout << "Turma removida." << std::endl;
+                break;
 
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        default:
-            break;
+            case 2:
+                if (canAdd(current)) {
+                    for (Student &student: obj.getStudents()) {
+                        if (student.getName() == current.getStudent().getName()) {
+                            student.addClass(current.getClassUc());
+                        }
+                    }
+                }
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
+        }
     }
 }
