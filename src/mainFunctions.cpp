@@ -501,7 +501,7 @@ bool canAdd(Order& current){
     std::vector<Student> students = obj.getStudents();
     std::vector<ScheduleUc> schedule = obj.getSchedule();
     std::vector<Slot> studentsHours, newClassesHours;
-    int occupation = 0, cap = 25;
+    int occupation = 0, cap = 28;
 
 
     //definir ocupacao da turma
@@ -543,8 +543,8 @@ bool canAdd(Order& current){
         for(const Slot& slot1 : studentsHours){
             for(const Slot& slot2 : newClassesHours){
                 if((slot1.get_day() == slot2.get_day() &&
-                    (slot2.get_startHour() + slot2.get_duration() < slot1.get_startHour() ||
-                     slot2.get_startHour() > slot1.get_startHour() + slot1.get_duration())) || slot1.get_day() != slot2.get_day())
+                    (slot2.get_startHour() + slot2.get_duration() <= slot1.get_startHour() ||
+                     slot2.get_startHour() >= slot1.get_startHour() + slot1.get_duration())) || slot1.get_day() != slot2.get_day())
                     continue;
                 else {
                     std::cout << "Nao foi possivel adicionar o/a " << current.getStudent().getName() << " a turma " <<
@@ -611,7 +611,7 @@ void changeSchedule() {
                         }
                     }
                 }
-                std::cout << "Turma removida." << std::endl;
+                std::cout << "Turma " << current.getClassUc().get_classCode() << " removida do horario do/a " << current.getStudent().getName() << std::endl;
                 break;
 
             case 2: //adicionar turma a estudante
@@ -621,7 +621,7 @@ void changeSchedule() {
                             student.addClass(current.getClassUc());
                         }
                     }
-                    std::cout << "Turma adicionada." << std::endl;
+                    std::cout << "Turma " << current.getClassUc().get_classCode() << " adicionada ao horario do/a " << current.getStudent().getName() << std::endl;
                 }
                 break;
 
@@ -646,7 +646,7 @@ void changeSchedule() {
                             student.addClass(current.getClassUc());
                         }
                     }
-                    std::cout << "Turma adicionada." << std::endl;
+                    std::cout << "Turma " << current.getClassUc().get_classCode() << " adicionada ao horario do/a " << current.getStudent().getName() << std::endl;
                 }
                 else { // if it cant add, adds the removed again
                     for (Student &student: obj.getStudents()) {
