@@ -12,8 +12,7 @@
 #include <queue>
 
 ScheduleManager obj;
-std::queue<Order> Orders;
-
+std::queue<Order> orders;
 
 void showMenu(){
     std::cout << "\n\n------------------- Menu -------------------" << std::endl;
@@ -22,6 +21,7 @@ void showMenu(){
     std::cout << "| 3- Listar Estudantes                     |" << std::endl;
     std::cout << "| 4- Estudantes com mais de n UC's         |" << std::endl;
     std::cout << "| 5- Alterar horario                       |" << std::endl;
+    std::cout << "| 6- Tratar pedidos                        |" << std::endl;
     std::cout << "| 0- Sair                                  |" << std::endl;
     std::cout << "--------------------------------------------" << std::endl;
 }
@@ -386,9 +386,9 @@ void moreThanNUc(){
 
 }
 
-void changeSchedule(){
+void addOrder(){
     short choice = 0;
-    std::string studentName;
+    std::string studentName, classCode, ucCode;
     std::vector<Student> students = obj.getStudents();
 
     std::cout << "-----------------------------------------------" << std::endl;
@@ -406,11 +406,46 @@ void changeSchedule(){
     }
 
     std::cout << "Nome Estudante: "; std::cin >> studentName;
+    std::cout << "Turma: "; std::cin >> classCode;
+    std::cout << "UC: "; std::cin >> ucCode;
+
     for(const Student& student : students){
         if(student.getName() == studentName){
-            Order _new = Order(student, choice);
-            Orders.push(_new);
+            Order _new = Order(student, {ucCode, classCode},choice);
+            orders.push(_new);
             break;
         }
+    }
+}
+
+
+void changeSchedule() {
+    Order current = orders.front(); orders.pop();
+
+    switch (current.getType()) {
+        case 1: //remover turma
+
+            for(Student& student : obj.getStudents()){
+                if(student.getName() == current.getStudent().getName()){
+                    for(int i=0; i < student.getClasses().size() ; i++){
+                        if(student.getClasses()[i].get_classCode() == current.getClassUc().get_classCode()
+                        && student.getClasses()[i].get_ucCode() == current.getClassUc().get_ucCode()){
+                            student.removeClass(i);
+                        }
+                    }
+                }
+            }
+
+            std::cout << "Turma removida" << std::endl;
+            break;
+
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+            break;
     }
 }

@@ -30,6 +30,10 @@ int main(){
                 break;
 
             case 5:
+                addOrder();
+                break;
+
+            case 6:
                 changeSchedule();
                 break;
 
