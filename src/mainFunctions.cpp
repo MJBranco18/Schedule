@@ -420,6 +420,7 @@ void addOrder(){
 
 
 void changeSchedule() {
+    int cap = 25;
     Order current = orders.front(); orders.pop();
 
     switch (current.getType()) {
