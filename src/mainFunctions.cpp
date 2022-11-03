@@ -496,7 +496,7 @@ void addOrder(){
     }
 }
 
-bool canAdd(const Order& current){
+bool canAdd(Order& current){
     int minOccupation = 10000;
     std::vector<Student> students = obj.getStudents();
     std::vector<ScheduleUc> schedule = obj.getSchedule();
@@ -605,6 +605,7 @@ void changeSchedule() {
                             if (student.getClasses()[i].get_classCode() == current.getClassUc().get_classCode()
                                 && student.getClasses()[i].get_ucCode() == current.getClassUc().get_ucCode()) {
                                 student.removeClass(i);
+                                current.getStudent().removeClass(i);
                             }
                         }
                     }
@@ -631,6 +632,7 @@ void changeSchedule() {
                             if (student.getClasses()[i].get_classCode() == current.getClassUcRem().get_classCode()
                                 && student.getClasses()[i].get_ucCode() == current.getClassUcRem().get_ucCode()) {
                                 student.removeClass(i);
+                                current.getStudent().removeClass(i);
                             }
                         }
                     }

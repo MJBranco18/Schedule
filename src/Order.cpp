@@ -18,7 +18,7 @@ Order::Order(Student student, ClassUc classUcRem, ClassUc classUc, int type) {
     this->classUc = classUc;
 }
 
-Student Order::getStudent() const {
+Student& Order::getStudent(){
     return this->student;
 }
 
@@ -49,5 +49,4 @@ ClassUc Order::getClassUcRem() const{
 void Order::setClassUcRem(const ClassUc &classUcRem) {
     Order::classUcRem = classUcRem;
 }
-
 
