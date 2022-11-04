@@ -10,7 +10,10 @@
 #include <istream>
 #include <fstream>
 
-
+/**
+ * Classe que representa o objeto principal da aplicação
+ * que neste caso é o gestor de horários
+ */
 class ScheduleManager {
 private:
     std::vector<Student> students; //se possivel, mudar para set

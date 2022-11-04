@@ -3,6 +3,10 @@
 
 #include <string>
 
+/**
+ * Classe que representa o objeto do horário de uma aula,
+ * com dia, hora de início, duração e o tipo da aula
+ */
 class Slot {
 private:
     float startHour, duration;

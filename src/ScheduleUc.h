@@ -5,6 +5,9 @@
 #include "ClassUc.h"
 #include <vector>
 
+/**
+ * Classe que representa o objeto das aulas de uma turma
+ */
 class ScheduleUc {
 private:
     ClassUc classUc;

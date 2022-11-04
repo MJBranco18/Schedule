@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 
+/**
+ * Classe que representa o objeto de uma turma associada a uma UC
+ */
 class ClassUc {
 private:
     std::string ucCode, classCode;

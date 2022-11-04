@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+/**
+ * Classe que representa o objeto de um estudante
+ */
 class Student {
 private:
     std::string name;

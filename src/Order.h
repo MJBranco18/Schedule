@@ -7,6 +7,9 @@
 #include "Student.h"
 #include "ClassUc.h"
 
+/**
+ * Classe que representa o objeto de um pedido
+ */
 class Order{
 private:
     Student student;
