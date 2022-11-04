@@ -1,6 +1,3 @@
-//
-// Created by Guilherme Coutinho on 02/11/2022.
-//
 #include "Order.h"
 
 Order::Order() = default;
