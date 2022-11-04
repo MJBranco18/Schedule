@@ -53,9 +53,8 @@ void occupations(){
         }
     }
 
-    /*
-     * Menu para escolher a ordenação das ocupações
-     */
+
+    //Menu para escolher a ordenação das ocupações
     std::cout << "\n--------------------------------" << std::endl;
     std::cout << "| 1- Ordenar por turma         |"<< std::endl;
     std::cout << "| 2- Ordenacao crescente       |" << std::endl;
@@ -66,17 +65,15 @@ void occupations(){
 
     std::cout << "Listagem total ou parcial? (1 = total, 0 = parcial): "; std::cin >> totalParcial;
 
-    /*
-     * Caso o utilizador escolha a listagem parcial, introduz quantas turmas quizer listar
-     */
+
+    //Caso o utilizador escolha a listagem parcial, introduz quantas turmas quiser listar
     if(totalParcial) nTurmas = occupations.size();
     else {
         std::cout << "\nQuantas turmas? "; std::cin >> nTurmas;
     }
 
-    /*
-     * Dar handle à escolha do utilizador
-     */
+
+    //Dar handle à escolha do utilizador
     switch (choice) {
         case 1:
             for(int i = 0 ; i < nTurmas ; i++) {
@@ -376,17 +373,15 @@ void listStudents() {
 
     std::cout << "Listagem total ou parcial? (1 = total, 0 = parcial): "; std::cin >> totalParcial;
 
-    /*
-     * Caso o utilizador escolha a listagem parcial, introduz quantas turmas quizer listar
-     */
+
+    //Caso o utilizador escolha a listagem parcial, introduz quantas turmas quiser listar
     if(!totalParcial) {
         std::cout << "\nQuantos estudantes? "; std::cin >> nStudents;
     }
     else nStudents = INT32_MAX;
 
-    /*
-     * Dar handle à escolha do utilizador
-     */
+
+    //Dar handle à escolha do utilizador
     switch (choice) {
         case 1:
             std::cout << "\nInserir ano: ";
@@ -461,9 +456,8 @@ void moreThanNUc(){
 
     std::cout << "Listagem total ou parcial? (1 = total, 0 = parcial): "; std::cin >> totalParcial;
 
-    /*
-     * Caso o utilizador escolha a listagem parcial, introduz quantas turmas quizer listar
-     */
+
+    //Caso o utilizador escolha a listagem parcial, introduz quantas turmas quiser listar
     if(!totalParcial) {
         std::cout << "\nQuantos estudantes? "; std::cin >> nStudents;
     }
@@ -485,7 +479,6 @@ void moreThanNUc(){
 /**
  * Função que recebe o input do utilizador de um pedido de alteração de horário
  */
-
 void addOrder(){
     short choice = 0;
     std::string studentName, classCode, ucCode, classCodeRem, classCodeAdd, ucCodeRem, ucCodeAdd;
@@ -500,9 +493,8 @@ void addOrder(){
 
     std::cin >> choice;
 
-    /*
-     * Handle da escolha do utilizador
-     */
+
+    //Handle da escolha do utilizador
     switch (choice) {
         case 1:
         case 2:
@@ -609,9 +601,7 @@ bool canAdd(Order& current){
     int occupation = 0, cap = 28;
 
 
-    /*
-     * definir ocupacao da turma
-     */
+    //definir ocupacao da turma
     for(const Student& student : students){
         for(const ClassUc& currClassUc : student.getClasses()){
             if(current.getClassUc().get_ucCode() == currClassUc.get_ucCode()
@@ -629,9 +619,7 @@ bool canAdd(Order& current){
     }
 
 
-    /*
-     * horas da turma do pedido
-     */
+    //horas da turma do pedido
     for(const ScheduleUc& currSchedule : schedule){
         if(currSchedule.get_classUc().get_ucCode() == current.getClassUc().get_ucCode() &&
            currSchedule.get_classUc().get_classCode() == current.getClassUc().get_classCode()){
@@ -641,9 +629,7 @@ bool canAdd(Order& current){
 
 
     for(const ClassUc& _class : current.getStudent().getClasses()) {
-        /*
-         * horas para cada turma do estudante
-         */
+        //horas para cada turma do estudante
         for (const ScheduleUc &currSchedule: schedule) {
             if (currSchedule.get_classUc().get_ucCode() == _class.get_ucCode() &&
                 currSchedule.get_classUc().get_classCode() == _class.get_classCode()) {
@@ -669,10 +655,7 @@ bool canAdd(Order& current){
     }
 
 
-
-    /*
-     * ocupacao de todas as turmas para verificar desiquilibrio
-     */
+    //ocupacao de todas as turmas para verificar desiquilibrio
     std::vector<std::pair<int,int>> occupations(16,{0,0});
 
     for(int i = 1; i <= 16; i++) occupations[i-1].first = i;
