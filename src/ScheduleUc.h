@@ -1,5 +1,5 @@
-#ifndef TRABALHO_SCHEDULEUC_H
-#define TRABALHO_SCHEDULEUC_H
+#ifndef SCHEDULEUC_H
+#define SCHEDULEUC_H
 
 #include "Slot.h"
 #include "ClassUc.h"

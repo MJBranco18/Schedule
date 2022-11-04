@@ -1,5 +1,5 @@
-#ifndef TRABALHO_STUDENT_H
-#define TRABALHO_STUDENT_H
+#ifndef STUDENT_H
+#define STUDENT_H
 
 #include "ClassUc.h"
 #include <string>

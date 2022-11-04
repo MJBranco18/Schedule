@@ -1,5 +1,5 @@
-#ifndef TRABALHO_CLASSUC_H
-#define TRABALHO_CLASSUC_H
+#ifndef CLASSUC_H
+#define CLASSUC_H
 
 #include <iostream>
 #include <string>
