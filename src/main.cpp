@@ -2,6 +2,22 @@
 #include "mainFunctions.cpp"
 #include <vector>
 
+void test(){
+    std::set<Student> students = obj.getStudents();
+    std::string studentName;
+    Student s;
+
+    std::cout << "Nome Estudante: ";
+    std::cin >> studentName;
+
+    s.setName(studentName);
+    auto it = students.find(s);
+
+    if( it != students.end()){
+        std::cout << "Found " << it->getName() << " - " << it->getStuCode() << std::endl;
+    }
+}
+
 /**
  * Função principal que corre a aplicação
  */
@@ -9,7 +25,8 @@ int main(){
     short choice = 0;
     std::string stuName;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
-
+    test();
+    /*
     //while para poder fazer várias mudanças e operações sem ter que correr o programa outra vez
     while(choice != -1) {
         showMenu(); std::cin >> choice;
@@ -50,6 +67,6 @@ int main(){
                 break;
         }
     }
-
+*/
     return 0;
 }

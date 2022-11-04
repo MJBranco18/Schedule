@@ -62,7 +62,10 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
     while(std::getline(in3,token,'\n')){
         std::stringstream iss(token);
         std::vector<std::string> temp;
+        std::vector<ClassUc> tempClasses;
         std::string tempstr;
+        std::vector<ClassUc> classes;
+        auto it = this->students.begin();
 
         while((std::getline(iss, tempstr, ','))){
             if (!tempstr.empty() && tempstr[tempstr.size() - 1] == '\r')
@@ -74,32 +77,22 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         current_student.setName(temp[1]);
         current_classUc.set_ucCode(temp[2]);
         current_classUc.set_classCode(temp[3]);
+        it = this->students.find(current_student);
 
-        current_scheduleUc.set_classUc(current_classUc);
+        if(it != this->students.end()){
+            classes = it->getClasses();
+            this->students.erase(it);
+        }
 
-        std::vector<ClassUc> classes;
         classes.push_back(current_classUc);
         current_student.setClasses(classes);
 
-        this->students.push_back(current_student);
+        this->students.insert(current_student);
+        current_scheduleUc.set_classUc(current_classUc);
     }
-
-    //file 3 - clean data
-    for(int i = 0; i < this->students.size(); i++){
-        for(int j = i + 1; j < this->students.size(); j++){
-            if(this->students[j].getName() == this->students[i].getName()){
-                current_classUc.set_classCode(this->students[j].getClasses()[0].get_classCode());
-                current_classUc.set_ucCode(this->students[j].getClasses()[0].get_ucCode());
-                this->students.erase(this->students.begin() + j);
-                j--;
-                this->students[i].addClass(current_classUc);
-            }
-        }
-    }
-
 }
 
-std::vector<Student>& ScheduleManager::getStudents(){
+std::set<Student>& ScheduleManager::getStudents(){
     return this->students;
 }
 

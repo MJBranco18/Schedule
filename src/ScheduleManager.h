@@ -16,13 +16,13 @@
  */
 class ScheduleManager {
 private:
-    std::vector<Student> students;
+    std::set<Student> students;
     std::vector<ScheduleUc> schedule;
 public:
     ScheduleManager();
     void readFiles(const std::string& file1, const std::string& file2, const std::string& file3);
 
-    std::vector<Student>& getStudents();
+    std::set<Student>& getStudents();
     std::vector<ScheduleUc>& getSchedule();
 
 
