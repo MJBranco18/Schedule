@@ -4,7 +4,6 @@
 
 /**
  * Função principal que corre a aplicação
- * @return
  */
 int main(){
     short choice = 0;
