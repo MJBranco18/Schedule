@@ -1,5 +1,5 @@
-#ifndef TRABALHO_SCHEDULEMANAGER_H
-#define TRABALHO_SCHEDULEMANAGER_H
+#ifndef SCHEDULEMANAGER_H
+#define SCHEDULEMANAGER_H
 
 #include "Student.h"
 #include "ScheduleUc.h"

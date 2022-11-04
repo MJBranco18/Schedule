@@ -1,5 +1,5 @@
-#ifndef SCHEDULE_ORDER_H
-#define SCHEDULE_ORDER_H
+#ifndef ORDER_H
+#define ORDER_H
 
 #include <iostream>
 #include <string>

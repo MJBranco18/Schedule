@@ -1,5 +1,5 @@
-#ifndef TRABALHO_SLOT_H
-#define TRABALHO_SLOT_H
+#ifndef SLOT_H
+#define SLOT_H
 
 #include <string>
 
