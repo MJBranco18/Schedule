@@ -14,7 +14,7 @@
 ScheduleManager obj;
 std::queue<Order> orders;
 
-/*
+/**
  *  Main menu da aplicação
  */
 void showMenu(){
@@ -29,7 +29,7 @@ void showMenu(){
     std::cout << "--------------------------------------------" << std::endl;
 }
 
-/*
+/**
  * Função para as ocupações
  */
 void occupations(){
@@ -107,7 +107,7 @@ void occupations(){
     }
 }
 
-/*
+/**
  * Função para preencher a matriz do horário
  */
 void durations(const ScheduleUc& currentClass, const Slot& currentSlot, std::vector<std::vector<std::string>>& sm, int day){
@@ -252,9 +252,9 @@ void durations(const ScheduleUc& currentClass, const Slot& currentSlot, std::vec
     }
 }
 
-/*
+/**
  * Função que chama a função anterior para cada aula do aluno e
- * Escreve na consola o horário atravez de uma matriz para o utilizador
+ * escreve na consola o horário atravez de uma matriz para o utilizador
  */
 void showSchedule(const std::string& stuName){
     std::vector<Student> students = obj.getStudents();
@@ -353,7 +353,7 @@ void showSchedule(const std::string& stuName){
 
 }
 
-/*
+/**
  * Função que lista os estudantes de cada ano/UC/turma
  */
 void listStudents() {
@@ -445,7 +445,7 @@ void listStudents() {
     }
 }
 
-/*
+/**
  * Função que mostra quais os estudantes que têm mais que um determinado número de UC's
  */
 void moreThanNUc(){
@@ -483,7 +483,7 @@ void moreThanNUc(){
 }
 
 /**
- * Função que recebe o input do utilizador de um pedido de alteraão de horário
+ * Função que recebe o input do utilizador de um pedido de alteração de horário
  */
 
 void addOrder(){
@@ -598,7 +598,7 @@ void addOrder(){
     }
 }
 
-/*
+/**
  * Função que verifica se uma turma pode ser adicionada a uma estudante
  */
 bool canAdd(Order& current){
@@ -704,7 +704,7 @@ bool canAdd(Order& current){
     return true;
 }
 
-/*
+/**
  * Função que trata dos pedidos adicionados à fila de espera
  */
 void changeSchedule() {
