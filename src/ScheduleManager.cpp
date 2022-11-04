@@ -3,11 +3,6 @@
 
 ScheduleManager::ScheduleManager() = default;
 
-ScheduleManager::ScheduleManager(std::vector<Student> students, std::vector<ScheduleUc> schedule){
-    this->students = students;
-    this->schedule = schedule;
-}
-
 void ScheduleManager::readFiles(const std::string& file1, const std::string& file2, const std::string& file3){
     std::fstream in1, in2, in3;
     std::string token;
@@ -102,16 +97,6 @@ void ScheduleManager::readFiles(const std::string& file1, const std::string& fil
         }
     }
 
-}
-
-
-
-void ScheduleManager::setStudents(std::vector<Student> students) {
-    this->students = students;
-}
-
-void ScheduleManager::setSchedule(std::vector<ScheduleUc> schedule) {
-    this->schedule = schedule;
 }
 
 std::vector<Student>& ScheduleManager::getStudents(){

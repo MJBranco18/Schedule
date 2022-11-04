@@ -2,11 +2,16 @@
 #include "mainFunctions.cpp"
 #include <vector>
 
+/**
+ * Função principal que corre a aplicação
+ * @return
+ */
 int main(){
     short choice = 0;
     std::string stuName;
     obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
 
+    //while para poder fazer várias mudanças e operações sem ter que correr o programa outra vez
     while(choice != -1) {
         showMenu(); std::cin >> choice;
 
