@@ -9,19 +9,19 @@
  */
 class Slot {
 private:
-    float startHour, duration;
-    std::string type, day;
+    float startHour_, duration_;
+    std::string type_, day_;
 public:
     Slot();
-    Slot(std::string day, float startHour, float duration, std::string type);
+    Slot(const std::string& day, float startHour, float duration, const std::string& type);
     std::string get_day() const;
     double get_startHour() const;
     double get_duration() const;
     std::string get_type() const;
-    void set_day(std::string day);
+    void set_day(const std::string& day);
     void set_startHour(double startHour);
     void set_duration(double duration);
-    void set_type(std::string type);
+    void set_type(const std::string& type);
 };
 
 

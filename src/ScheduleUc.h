@@ -10,13 +10,13 @@
  */
 class ScheduleUc {
 private:
-    ClassUc classUc;
-    std::vector<Slot> ucClassSchedule;
+    ClassUc classUc_;
+    std::vector<Slot> ucClassSchedule_;
 public:
     ScheduleUc();
-    ScheduleUc(ClassUc classUc, std::vector<Slot> ucClassSchedule);
-    void set_classUc(ClassUc classUc);
-    void set_ucClassSchedule(std::vector<Slot> ucClassSchedule);
+    ScheduleUc(const ClassUc& classUc, const std::vector<Slot>& ucClassSchedule);
+    void set_classUc(const ClassUc& classUc);
+    void set_ucClassSchedule(const std::vector<Slot>& ucClassSchedule);
     ClassUc get_classUc() const;
     std::vector<Slot> get_ucClassSchedule() const;
     void addSlot(const Slot& slot);

@@ -43,8 +43,3 @@ void Student::removeClass(int pos){
 bool Student::operator < (const Student& s) const{
     return this->name_ < s.getName();
 }
-/*
-Student Student::operator = (const Student& s) const{
-    return {s.getName(),s.getStuCode(),s.getClasses()};
-}
- */

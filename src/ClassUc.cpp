@@ -2,25 +2,25 @@
 
 ClassUc::ClassUc() {}
 
-ClassUc::ClassUc(std::string ucCode, std::string classCode){
-    this->ucCode = ucCode;
-    this->classCode = classCode;
+ClassUc::ClassUc(const std::string& ucCode, const std::string& classCode){
+    this->ucCode_ = ucCode;
+    this->classCode_ = classCode;
 }
 
 std::string ClassUc::get_ucCode() const {
-    return this->ucCode;
+    return this->ucCode_;
 }
 
 std::string ClassUc::get_classCode() const {
-    return this->classCode;
+    return this->classCode_;
 }
 
-void ClassUc::set_ucCode(std::string ucCode) {
-    this->ucCode = ucCode;
+void ClassUc::set_ucCode(const std::string& ucCode) {
+    this->ucCode_ = ucCode;
 }
 
-void ClassUc::set_classCode(std::string classCode) {
-    this->classCode = classCode;
+void ClassUc::set_classCode(const std::string& classCode) {
+    this->classCode_ = classCode;
 }
 
 
