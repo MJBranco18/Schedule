@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 
-/*
+/**
  * Função de comparação para sort dos pairs da ocupação
  * neste caso é ordem crescente
  */
@@ -15,7 +15,7 @@ bool occupationsCresc(std::pair<int,int> p1, std::pair<int,int> p2){
     return false;
 }
 
-/*
+/**
  * Função de comparação para sort dos pairs da ocupação
  * neste caso é ordem decrescente
  */
@@ -28,7 +28,7 @@ bool occupationsDecresc(std::pair<int,int> p1, std::pair<int,int> p2){
     return false;
 }
 
-/*
+/**
  * Função de comparação para sort da listagem de estudantes
  * coloca o vetor de estudantes por ordem alfabética
  */

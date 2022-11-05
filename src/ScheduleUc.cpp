@@ -2,27 +2,27 @@
 
 ScheduleUc::ScheduleUc() = default;
 
-ScheduleUc::ScheduleUc(ClassUc classUc, std::vector<Slot> ucClassSchedule){
-    this->classUc = classUc;
-    this->ucClassSchedule = ucClassSchedule;
+ScheduleUc::ScheduleUc(const ClassUc& classUc, const std::vector<Slot>& ucClassSchedule){
+    this->classUc_ = classUc;
+    this->ucClassSchedule_ = ucClassSchedule;
 }
 
-void ScheduleUc::set_classUc(ClassUc classUc) {
-    this->classUc = classUc;
+void ScheduleUc::set_classUc(const ClassUc& classUc) {
+    this->classUc_ = classUc;
 }
 
-void ScheduleUc::set_ucClassSchedule(std::vector<Slot> ucClassSchedule) {
-    this->ucClassSchedule = ucClassSchedule;
+void ScheduleUc::set_ucClassSchedule(const std::vector<Slot>& ucClassSchedule) {
+    this->ucClassSchedule_ = ucClassSchedule;
 }
 
 ClassUc ScheduleUc::get_classUc() const {
-    return this->classUc;
+    return this->classUc_;
 }
 
 std::vector<Slot> ScheduleUc::get_ucClassSchedule() const {
-    return this->ucClassSchedule;
+    return this->ucClassSchedule_;
 }
 
 void ScheduleUc::addSlot(const Slot& slot) {
-    this->ucClassSchedule.push_back(slot);
+    this->ucClassSchedule_.push_back(slot);
 }

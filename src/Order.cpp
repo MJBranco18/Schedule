@@ -2,48 +2,31 @@
 
 Order::Order() = default;
 
-Order::Order(Student student, ClassUc classUc, int type) {
-    this->student = student;
-    this->type = type;
-    this->classUc= classUc;
+Order::Order(const Student& student, const ClassUc& classUc, int type) {
+    this->student_ = student;
+    this->type_ = type;
+    this->classUc_ = classUc;
 }
 
-Order::Order(Student student, ClassUc classUcRem, ClassUc classUc, int type) {
-    this->student = student;
-    this->type = type;
-    this->classUcRem = classUcRem;
-    this->classUc = classUc;
+Order::Order(const Student& student, const ClassUc& classUcRem, const ClassUc& classUc, int type) {
+    this->student_ = student;
+    this->type_ = type;
+    this->classUcRem_ = classUcRem;
+    this->classUc_ = classUc;
 }
 
 Student& Order::getStudent(){
-    return this->student;
-}
-
-void Order::setStudent(const Student &student) {
-    this->student = student;
+    return this->student_;
 }
 
 int Order::getType() const {
-    return this->type;
-}
-
-void Order::setType(int type) {
-    this->type = type;
+    return this->type_;
 }
 
 ClassUc Order::getClassUc() const {
-    return this->classUc;
-}
-
-void Order::setClassUc(const ClassUc& classUc){
-    this->classUc = classUc;
+    return this->classUc_;
 }
 
 ClassUc Order::getClassUcRem() const{
-    return classUcRem;
+    return classUcRem_;
 }
-
-void Order::setClassUcRem(const ClassUc &classUcRem) {
-    Order::classUcRem = classUcRem;
-}
-

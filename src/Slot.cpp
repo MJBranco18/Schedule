@@ -2,39 +2,39 @@
 
 Slot::Slot() = default;
 
-Slot::Slot(std::string day, float startHour, float duration, std::string type){
-    this->day = day;
-    this->startHour = startHour;
-    this->duration = duration;
-    this->type = type;
+Slot::Slot(const std::string& day, float startHour, float duration, const std::string& type){
+    this->day_ = day;
+    this->startHour_ = startHour;
+    this->duration_ = duration;
+    this->type_ = type;
 }
 
 std::string Slot::get_day() const {
-    return day;
+    return day_;
 }
-void Slot::set_day(std::string day) {
-    this -> day = day;
+void Slot::set_day(const std::string& day) {
+    this -> day_ = day;
 }
 
 double Slot::get_startHour() const {
-    return startHour;
+    return startHour_;
 }
 void Slot::set_startHour(double startHour) {
-    this -> startHour = startHour;
+    this -> startHour_ = startHour;
 }
 
 double Slot::get_duration() const {
-    return duration;
+    return duration_;
 }
 void Slot::set_duration(double duration) {
-    this->duration = duration;
+    this->duration_ = duration;
 }
 
 std::string Slot::get_type() const{
-    return type;
+    return type_;
 }
-void Slot::set_type(std::string type) {
-    this->type = type;
+void Slot::set_type(const std::string& type) {
+    this->type_ = type;
 }
 
 
