@@ -1,22 +1,55 @@
 #include <iostream>
-#include "ScheduleManager.h"
-#include "ScheduleUc.h"
-#include "Student.h"
-#include "Slot.h"
-#include "ClassUc.h"
+#include "mainFunctions.cpp"
+#include <vector>
 
-void showMenu(){
-    std::cout << "------------------- Menu -------------------" << std::endl;
-    std::cout << "| 1- Ocupacao                              |" << std::endl;
-    std::cout << "| 2- Horario                               |" << std::endl;
-    std::cout << "| 3- Listar Estudantes                     |" << std::endl;
-    std::cout << "| 4- Estudantes com mais n UC's            |" << std::endl;
-    std::cout << "--------------------------------------------" << std::endl;
-}
 
+/**
+ * Função principal que corre a aplicação
+ */
 int main(){
-    ScheduleManager obj;
-    obj.readFiles();
-    showMenu();
+    short choice = 0;
+    std::string stuName;
+    obj.readFiles("classes_per_uc.csv","classes.csv","students_classes.csv");
+
+    //while para poder fazer várias mudanças e operações sem ter que correr o programa outra vez
+    while(choice != -1) {
+        showMenu(); std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                occupations();
+                break;
+
+            case 2:
+                std::cout << "Nome estudante: ";
+                std::cin >> stuName;
+                showSchedule(stuName);
+                break;
+
+            case 3:
+                listStudents();
+                break;
+
+            case 4:
+                moreThanNUc();
+                break;
+
+            case 5:
+                addOrder();
+                break;
+
+            case 6:
+                changeSchedule();
+                break;
+
+            case 0:
+                choice = -1;
+                break;
+
+            default:
+                std::cout << "\nEscolha uma opcao valida." << std::endl;
+                break;
+        }
+    }
     return 0;
 }

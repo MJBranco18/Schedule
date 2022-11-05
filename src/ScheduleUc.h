@@ -1,16 +1,25 @@
-#ifndef TRABALHO_SCHEDULEUC_H
-#define TRABALHO_SCHEDULEUC_H
+#ifndef SCHEDULEUC_H
+#define SCHEDULEUC_H
 
 #include "Slot.h"
+#include "ClassUc.h"
 #include <vector>
 
+/**
+ * Classe que representa o objeto das aulas de uma turma
+ */
 class ScheduleUc {
 private:
-    int ucCode, classCode;
-    std::vector<Slot> schedule;
+    ClassUc classUc_;
+    std::vector<Slot> ucClassSchedule_;
 public:
-    ScheduleUc(int ucCode, int classCode, std::vector<Slot> schedule);
-
+    ScheduleUc();
+    ScheduleUc(const ClassUc& classUc, const std::vector<Slot>& ucClassSchedule);
+    void set_classUc(const ClassUc& classUc);
+    void set_ucClassSchedule(const std::vector<Slot>& ucClassSchedule);
+    ClassUc get_classUc() const;
+    std::vector<Slot> get_ucClassSchedule() const;
+    void addSlot(const Slot& slot);
 };
 
 
