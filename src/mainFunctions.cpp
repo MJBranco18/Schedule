@@ -444,13 +444,13 @@ void moreThanNUc(){
     bool totalParcial;
     unsigned long nStudents;
     std::set<Student> students = obj.getStudents();
-
+    auto it = students.begin();
     std::cout << "Estudantes inscritos em mais de quantas UC's? "; std::cin >> n;
 
     std::cout << "Listagem total ou parcial? (1 = total, 0 = parcial): "; std::cin >> totalParcial;
 
 
-    //Caso o utilizador escolha a listagem parcial, introduz quantas turmas quiser listar
+    //Caso o utilizador escolha a listagem parcial, introduz quantos estudantes quiser listar
     if(!totalParcial) {
         std::cout << "\nQuantos estudantes? "; std::cin >> nStudents;
     }
@@ -458,10 +458,10 @@ void moreThanNUc(){
 
     std::cout << "Estudantes inscritos em mais de " << n << " UC's: \n" << std::endl;
 
-    for(const Student& student : students){
-        if(student.getClasses().size() > n && count < nStudents){
+    for(; it != students.end();it++){
+        if(it->getClasses().size() > n && count < nStudents){
             count++;
-            std::cout << student.getName() << " - "  << student.getStuCode() <<std::endl;
+            std::cout << it->getName() << " - "  << it->getStuCode() <<std::endl;
         }
     }
     if(totalParcial) {
