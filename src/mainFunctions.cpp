@@ -463,6 +463,7 @@ void moreThanNUc(){
             count++;
             std::cout << it->getName() << " - "  << it->getStuCode() <<std::endl;
         }
+        if(count == nStudents) break;
     }
     if(totalParcial) {
         std::cout << "\n" << count << " estudantes tem mais de " << n << " UC's.";
