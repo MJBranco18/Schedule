@@ -2,21 +2,6 @@
 #include "mainFunctions.cpp"
 #include <vector>
 
-void test(){
-    std::set<Student> students = obj.getStudents();
-    std::string studentName;
-    Student s;
-
-    std::cout << "Nome Estudante: ";
-    std::cin >> studentName;
-
-    s.setName(studentName);
-    auto it = students.find(s);
-
-    if( it != students.end()){
-        std::cout << "Found " << it->getName() << " - " << it->getStuCode() << std::endl;
-    }
-}
 
 /**
  * Função principal que corre a aplicação
@@ -66,6 +51,5 @@ int main(){
                 break;
         }
     }
-
     return 0;
 }
