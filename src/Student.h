@@ -17,7 +17,7 @@ public:
     Student();
     Student(const std::string& name, long int stuCode, const std::vector<ClassUc>& classes);
     bool operator < (const Student& s) const;
-    Student operator = (Student& s) const;
+    //Student operator = (const Student& s) const;
     std::string getName() const;
     long int getStuCode() const;
     std::vector<ClassUc> getClasses() const;

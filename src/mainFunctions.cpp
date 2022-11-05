@@ -569,6 +569,7 @@ void addOrder(){
                     std::cin >> classCodeAdd;
                     std::cout << "UC a adicionar: ";
                     std::cin >> ucCodeAdd;
+
                     Order _new = Order(*it, {ucCodeRem, classCodeRem},
                                        {ucCodeAdd, classCodeAdd}, 3);
                     orders.push(_new);
@@ -669,8 +670,7 @@ bool canAdd(Order& current){
         if (p.second < minOccupation) minOccupation = p.second;
     }
 
-    if(occupations[std::stoi(current.getClassUc().get_classCode().substr(5)) - 1].second + 1
-    >= minOccupation + 4) {
+    if(occupation + 1 >= minOccupation + 4) {
         std::cout << "Nao foi possivel adicionar o/a " << current.getStudent().getName() << " a turma " <<
                   current.getClassUc().get_classCode() << " da UC " <<
                   current.getClassUc().get_ucCode() << " devido a uma provocacao de desiquilibrio "
@@ -686,10 +686,11 @@ bool canAdd(Order& current){
  */
 
 void changeSchedule() {
-    ClassUc temp;
     while(!orders.empty()) {
         Order current = orders.front();
         orders.pop();
+        ClassUc temp;
+        Student s;
         auto it = obj.getStudents().find(current.getStudent());
 
         switch (current.getType()) {
@@ -698,9 +699,12 @@ void changeSchedule() {
                     for (int i = 0; i < it->getClasses().size(); i++) {
                         if (it->getClasses()[i].get_classCode() == current.getClassUc().get_classCode()
                             && it->getClasses()[i].get_ucCode() == current.getClassUc().get_ucCode()) {
-                            Student s = *it;
-                            s.removeClass(i);
-                            *it = s;
+
+                            s = *it;
+                            obj.getStudents().erase(it); //apagar student com as classes antigas
+                            s.removeClass(i); //remover classe
+                            obj.getStudents().insert(s); //voltar a colocar student com classes atualizadas
+
                             current.getStudent().removeClass(i);
                         }
                     }
@@ -712,9 +716,10 @@ void changeSchedule() {
             case 2: //adicionar turma a estudante
                 if (canAdd(current)) {
                     if(it != obj.getStudents().end()){
-                        Student s = *it;
-                        s.addClass(current.getClassUc());
-                        *it = s;
+                        s = *it;
+                        obj.getStudents().erase(it); //apagar student com as classes antigas
+                        s.addClass(current.getClassUc()); //adicionar classe
+                        obj.getStudents().insert(s); //voltar a colocar student com classes atualizadas
                     }
                     std::cout << "Turma " << current.getClassUc().get_classCode() << " adicionada ao horario do/a " <<
                     current.getStudent().getName() << std::endl;
@@ -723,35 +728,40 @@ void changeSchedule() {
 
             case 3: //alterar uma turma por outra
                 //remove a turma incialmente
-                if(it != obj.getStudents().end()){
+                if(it != obj.getStudents().end()) {
+                    s = *it;
+                    current.getStudent().setClasses(s.getClasses());
                     for (int i = 0; i < it->getClasses().size(); i++) {
                         if (it->getClasses()[i].get_classCode() == current.getClassUcRem().get_classCode()
                             && it->getClasses()[i].get_ucCode() == current.getClassUcRem().get_ucCode()) {
+                            obj.getStudents().erase(it); //apagar student com as classes antigas
+                            s.removeClass(i); //remover classe
+                            obj.getStudents().insert(s); //voltar a colocar student com classes atualizadas
+
                             temp = current.getClassUc();
-                            Student s = *it;
-                            s.removeClass(i);
-                            *it = s;
+
                             current.getStudent().removeClass(i);
                         }
                     }
                 }
 
-
-                if (canAdd(current)) { //se puder adicionar, adiciona
-                    if(it != obj.getStudents().end()){
+                it = obj.getStudents().find(current.getStudent());
+                if(it != obj.getStudents().end()) {
+                    s = *it;
+                    if (canAdd(current)) { //se puder adicionar, adiciona
                         current.getStudent().addClass(temp);
-                        Student s = *it;
-                        s.addClass(current.getClassUc());
-                        *it = s;
+
+                        obj.getStudents().erase(it); //apagar student com as classes antigas
+                        s.addClass(current.getClassUc()); //adicionar classe
+                        obj.getStudents().insert(s); //voltar a colocar student com classes atualizadas
+
+                        std::cout << "Turma " << current.getClassUc().get_classCode() << " adicionada ao horario do/a "
+                        << current.getStudent().getName() << std::endl;
                     }
-                    std::cout << "Turma " << current.getClassUc().get_classCode() << " adicionada ao horario do/a " <<
-                    current.getStudent().getName() << std::endl;
-                }
-                else { //se não puder adicionar, adiciona a turma previamente removida
-                    if(it != obj.getStudents().end()) {
-                        Student s = *it;
-                        s.addClass(current.getClassUcRem());
-                        *it = s;
+                    else { //se não puder adicionar, adiciona a turma previamente removida
+                            obj.getStudents().erase(it); //apagar student com as classes antigas
+                            s.addClass(current.getClassUcRem()); //adicionar classe
+                            obj.getStudents().insert(s); //voltar a colocar student com classes atualizadas
                     }
                 }
                 break;

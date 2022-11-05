@@ -12,14 +12,14 @@
  */
 class Order{
 private:
-    Student student;
-    int type;
-    ClassUc classUc, classUcRem;
+    Student student_;
+    int type_;
+    ClassUc classUc_, classUcRem_;
 
 public:
     Order();
-    Order(Student student, ClassUc classUc,int type);
-    Order(Student student, ClassUc classUcRem, ClassUc classUc, int type);
+    Order(const Student& student, const ClassUc& classUc, int type);
+    Order(const Student& student, const ClassUc& classUcRem, const ClassUc& classUc, int type);
     ClassUc getClassUc() const;
     Student& getStudent();
     int getType() const;
